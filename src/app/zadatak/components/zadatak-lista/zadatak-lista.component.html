@@ -1,1 +1,3 @@
-<p>zadatak-lista works!</p>
+@for (zadatak of (projekt$ | async)!.zadaci; track $index) {
+<zadatak-card [zadatak]="zadatak"></zadatak-card>
+}

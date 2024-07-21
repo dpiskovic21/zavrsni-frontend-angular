@@ -1,0 +1,10 @@
+<p-card [header]="zadatak.naziv">
+  <p>Prioritet: {{ zadatak.prioritet }}</p>
+  <p>Rok: {{ zadatak.rok | date }}</p>
+  <ng-template pTemplate="footer">
+    <div>
+      <p-button label="Cancel" severity="secondary" />
+      <p-button label="Save" />
+    </div>
+  </ng-template>
+</p-card>

@@ -1,4 +1,4 @@
-export const zadatakRute = {
+export const ZadatakRute = {
   Lista: 'lista',
   Novi: 'novi',
 };

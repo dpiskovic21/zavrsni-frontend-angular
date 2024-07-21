@@ -1,14 +1,14 @@
 import { Routes } from '@angular/router';
-import { zadatakRute } from './zadatak-rute';
+import { ZadatakRute } from './zadatak-rute';
 
-export const routes: Routes = [
+export const zadatakRoutes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: zadatakRute.Lista,
+    redirectTo: ZadatakRute.Lista,
   },
   {
-    path: zadatakRute.Lista,
+    path: ZadatakRute.Lista,
     loadComponent: () =>
       import('../components/zadatak-lista/zadatak-lista.component').then(
         (c) => c.ZadatakListaComponent

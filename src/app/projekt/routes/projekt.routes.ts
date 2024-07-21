@@ -24,6 +24,8 @@ export const projektRoutes: Routes = [
   {
     path: ':id',
     loadChildren: () =>
-      import('../../zadatak/routes/zadatak.routes').then((r) => r.routes),
+      import('../../zadatak/routes/zadatak.routes').then(
+        (r) => r.zadatakRoutes
+      ),
   },
 ];

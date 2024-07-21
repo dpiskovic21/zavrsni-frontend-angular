@@ -5,13 +5,20 @@ export const projektRoutes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: ProjektRute.List,
+    redirectTo: ProjektRute.Lista,
   },
   {
-    path: ProjektRute.List,
+    path: ProjektRute.Lista,
     loadComponent: () =>
       import('../components/projekt-lista/projekt-lista.component').then(
         (c) => c.ProjektListaComponent
+      ),
+  },
+  {
+    path: ProjektRute.Novi,
+    loadComponent: () =>
+      import('../components/projekt-novi/projekt-novi.component').then(
+        (c) => c.ProjektNoviComponent
       ),
   },
 ];

@@ -1,3 +1,4 @@
 export const ProjektRute = {
-  List: 'lista',
+  Lista: 'lista',
+  Novi: 'novi',
 };

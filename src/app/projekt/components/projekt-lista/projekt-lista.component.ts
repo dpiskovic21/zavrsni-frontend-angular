@@ -1,10 +1,16 @@
 import { Component } from '@angular/core';
+import { PrimengModule } from '../../../shared/modules/primeng/primeng.module';
+import { ProjektService } from '../../services/projekt.service';
 
 @Component({
   selector: 'projekt-lista',
   standalone: true,
-  imports: [],
+  imports: [PrimengModule],
   templateUrl: './projekt-lista.component.html',
   styleUrl: './projekt-lista.component.css',
 })
-export class ProjektListaComponent {}
+export class ProjektListaComponent {
+  projekti$ = this.projektService.getProjekti();
+
+  constructor(private projektService: ProjektService) {}
+}

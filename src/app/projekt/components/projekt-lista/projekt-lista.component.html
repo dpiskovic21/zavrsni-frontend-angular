@@ -1,1 +1,3 @@
-{{ projekti$ | async | json }}
+@for (projekt of (projekti$ | async); track $index) {
+<projekt-card [projekt]="projekt"></projekt-card>
+}

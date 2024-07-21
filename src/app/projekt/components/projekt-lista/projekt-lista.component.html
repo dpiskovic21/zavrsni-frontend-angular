@@ -1,3 +1,5 @@
 @for (projekt of (projekti$ | async); track $index) {
 <projekt-card [projekt]="projekt"></projekt-card>
 }
+
+<p-button icon="pi pi-plus" (onClick)="navigirajNaIzraduProjekta()" />

@@ -7,7 +7,7 @@ import { Korisnik } from '../interfaces';
   providedIn: 'root',
 })
 export class KorisnikService {
-  private readonly url = apiURL + 'korisnik';
+  private readonly url = apiURL + '/korisnik';
 
   constructor(private http: HttpClient) {}
 

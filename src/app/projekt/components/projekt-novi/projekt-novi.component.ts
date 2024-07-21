@@ -13,6 +13,7 @@ import { ToastService } from '../../../shared/services/toast.service';
 import { Router } from '@angular/router';
 import { AppRute } from '../../../routes/app-rute';
 import { ProjektRute } from '../../routes/projekt-rute';
+import { AutorizacijaService } from '../../../autorizacija/services/autorizacija.service';
 
 @Component({
   selector: 'projekt-novi',
@@ -38,14 +39,15 @@ export class ProjektNoviComponent {
     private korisnikService: KorisnikService,
     private projektService: ProjektService,
     private toast: ToastService,
-    private ruter: Router
+    private ruter: Router,
+    private autorizacijaService: AutorizacijaService
   ) {}
 
   ngOnInit() {
     this.forma = new FormGroup({
       naziv: new FormControl('', [Validators.required]),
       voditelji: new FormControl(
-        [],
+        [this.autorizacijaService.prijavljeniKorisnik.id],
         [Validators.required, Validators.minLength(1)]
       ),
     });

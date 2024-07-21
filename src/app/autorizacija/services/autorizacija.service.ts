@@ -12,6 +12,16 @@ export class AutorizacijaService {
 
   constructor(private http: HttpClient) {}
 
+  get prijavljeniKorisnik() {
+    const korisnik = JSON.parse(localStorage.getItem('korisnik')!);
+
+    if (!korisnik) {
+      return null;
+    }
+
+    return korisnik;
+  }
+
   prijava(dto: PrijavaDTO) {
     return this.http.post<Korisnik>(this.url + '/prijava', dto);
   }

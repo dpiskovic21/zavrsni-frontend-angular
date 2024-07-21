@@ -8,4 +8,4 @@ export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideHttpClient()],
 };
 
-export const apiURL = 'http://localhost:3000';
+export const apiURL = 'http://localhost:3000/api';

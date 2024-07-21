@@ -1,1 +1,6 @@
-<p>prijava works!</p>
+<form [formGroup]="forma">
+  <input type="text" formControlName="email" /><input
+    type="text"
+    formControlName="lozinka"
+  /><p-button label="Prijava" (onClick)="prijaviSe()" />
+</form>

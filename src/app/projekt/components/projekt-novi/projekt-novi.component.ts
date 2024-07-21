@@ -15,7 +15,7 @@ import { AppRute } from '../../../routes/app-rute';
 import { ProjektRute } from '../../routes/projekt-rute';
 
 @Component({
-  selector: 'app-projekt-novi',
+  selector: 'projekt-novi',
   standalone: true,
   imports: [PrimengModule, ReactiveFormsModule],
   templateUrl: './projekt-novi.component.html',

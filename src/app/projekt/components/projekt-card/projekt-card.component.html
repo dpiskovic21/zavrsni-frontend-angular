@@ -1,6 +1,6 @@
 <p-card [header]="projekt.naziv">
   <p>Započet: {{ projekt.datumPocetka | date }}</p>
   <ng-template pTemplate="footer">
-    <p-button label="Otvori" />
+    <p-button label="Otvori" (onClick)="preusmjeriNaZadatke()" />
   </ng-template>
 </p-card>

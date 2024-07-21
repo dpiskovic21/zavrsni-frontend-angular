@@ -21,4 +21,9 @@ export const projektRoutes: Routes = [
         (c) => c.ProjektNoviComponent
       ),
   },
+  {
+    path: ':id',
+    loadChildren: () =>
+      import('../../zadatak/routes/zadatak.routes').then((r) => r.routes),
+  },
 ];

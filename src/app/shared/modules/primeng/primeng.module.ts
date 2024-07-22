@@ -7,6 +7,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ToastModule } from 'primeng/toast';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
 @NgModule({
   declarations: [],
@@ -18,6 +19,7 @@ import { ToastModule } from 'primeng/toast';
     InputTextModule,
     MultiSelectModule,
     ToastModule,
+    DynamicDialogModule,
   ],
   exports: [
     CommonModule,
@@ -27,6 +29,7 @@ import { ToastModule } from 'primeng/toast';
     InputTextModule,
     MultiSelectModule,
     ToastModule,
+    DynamicDialogModule,
   ],
 })
 export class PrimengModule {}

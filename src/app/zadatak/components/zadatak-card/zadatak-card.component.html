@@ -3,8 +3,7 @@
   <p>Rok: {{ zadatak.rok | date }}</p>
   <ng-template pTemplate="footer">
     <div>
-      <p-button label="Cancel" severity="secondary" />
-      <p-button label="Save" />
+      <p-button label="Detalji" (onClick)="otvoriDetalje()" />
     </div>
   </ng-template>
 </p-card>

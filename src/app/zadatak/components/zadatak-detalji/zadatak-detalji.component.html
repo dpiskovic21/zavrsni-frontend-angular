@@ -1,0 +1,34 @@
+<ng-container *ngIf="zadatak$ | async as zadatak">
+  <p>{{ zadatak.prioritet }}</p>
+  <p>{{ zadatak.status }}</p>
+  <p>{{ zadatak.datumIzrade }}</p>
+  <p *ngIf="zadatak.datumZavrsetka">{{ zadatak.datumZavrsetka }}</p>
+
+  <div class="sadrzaj">
+    <div class="opis-komentari">
+      <p>{{ zadatak.opis }}</p>
+      <div class="komentari">
+        <h3>Komentari</h3>
+        <div *ngFor="let komentar of zadatak.komentari">
+          <span
+            >{{ komentar.korisnik.ime + " " + komentar.korisnik.prezime }} &#64;
+            {{ komentar.datumIzrade | date }}</span
+          >
+          <p>{{ komentar.sadrzaj }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="korisnici">
+      <div class="korisnici-wrapper">
+        <p>
+          Izvjestitelj:
+          {{ zadatak.izvjestitelj.ime + " " + zadatak.izvjestitelj.prezime }}
+        </p>
+        <p>
+          Izvršitelj:
+          {{ zadatak.izvrsitelj.ime + " " + zadatak.izvrsitelj.prezime }}
+        </p>
+      </div>
+    </div>
+  </div>
+</ng-container>

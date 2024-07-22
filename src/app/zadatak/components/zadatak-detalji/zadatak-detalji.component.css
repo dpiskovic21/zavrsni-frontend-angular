@@ -1,0 +1,10 @@
+.sadrzaj {
+  display: flex;
+  padding: 2.5rem;
+}
+
+.korisnici {
+  flex: 1;
+  display: flex;
+  justify-content: end;
+}

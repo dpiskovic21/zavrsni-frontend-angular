@@ -12,9 +12,8 @@ import {
 import { ZadatakService } from '../../services/zadatak.service';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ActivatedRoute } from '@angular/router';
-import { Zadatak } from '../../interfaces';
+import { Zadatak, ZadatakDTO } from '../../interfaces';
 import { AutorizacijaService } from '../../../autorizacija/services/autorizacija.service';
-import { ZadatakDTO } from '../../interfaces/zadatak-dto';
 @Component({
   selector: 'zadatak-novi',
   standalone: true,

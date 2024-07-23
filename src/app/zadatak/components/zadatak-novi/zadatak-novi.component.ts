@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { PrimengModule } from '../../../shared/modules/primeng/primeng.module';
 import { KorisnikService } from '../../../korisnik/services/korisnik.service';
 import { map, Observable } from 'rxjs';
-import { ZadatakNoviUploadComponent } from '../zadatak-novi-upload/zadatak-novi-upload.component';
 import {
   FormControl,
   FormGroup,
@@ -19,12 +18,7 @@ import { ZadatakDTO } from '../../interfaces/zadatak-dto';
 @Component({
   selector: 'zadatak-novi',
   standalone: true,
-  imports: [
-    PrimengModule,
-    ZadatakNoviUploadComponent,
-    ReactiveFormsModule,
-    FormsModule,
-  ],
+  imports: [PrimengModule, ReactiveFormsModule, FormsModule],
   templateUrl: './zadatak-novi.component.html',
   styleUrl: './zadatak-novi.component.css',
 })

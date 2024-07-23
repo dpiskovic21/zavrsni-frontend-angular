@@ -8,7 +8,13 @@ import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ToastModule } from 'primeng/toast';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
-
+import { StepperModule } from 'primeng/stepper';
+import { EditorModule } from 'primeng/editor';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { CalendarModule } from 'primeng/calendar';
+import { DropdownModule } from 'primeng/dropdown';
+import { FileUploadModule } from 'primeng/fileupload';
+import { BadgeModule } from 'primeng/badge';
 @NgModule({
   declarations: [],
   imports: [
@@ -20,6 +26,13 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
     MultiSelectModule,
     ToastModule,
     DynamicDialogModule,
+    StepperModule,
+    EditorModule,
+    SelectButtonModule,
+    CalendarModule,
+    DropdownModule,
+    FileUploadModule,
+    BadgeModule,
   ],
   exports: [
     CommonModule,
@@ -30,6 +43,13 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
     MultiSelectModule,
     ToastModule,
     DynamicDialogModule,
+    StepperModule,
+    EditorModule,
+    SelectButtonModule,
+    CalendarModule,
+    DropdownModule,
+    FileUploadModule,
+    BadgeModule,
   ],
 })
 export class PrimengModule {}

@@ -1,3 +1,5 @@
 @for (zadatak of (projekt$ | async)!.zadaci; track $index) {
 <zadatak-card [zadatak]="zadatak"></zadatak-card>
 }
+
+<p-button icon="pi pi-plus" (onClick)="otvoriDialogZaIzraduZadatka()" />

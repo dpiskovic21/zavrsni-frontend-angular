@@ -1,0 +1,78 @@
+<form [formGroup]="forma">
+  <p-stepper [linear]="true">
+    <p-stepperPanel header="Osnovne informacije">
+      <ng-template
+        pTemplate="content"
+        let-nextCallback="nextCallback"
+        let-index="index"
+      >
+        <div>
+          <p-floatLabel>
+            <input pInputText inputId="naziv" formControlName="naziv" />
+            <label for="naziv">Naziv zadatka</label>
+          </p-floatLabel>
+          <p-editor [style]="{ height: '320px' }" formControlName="opis" />
+        </div>
+        <div>
+          <p-button
+            label="Dalje"
+            icon="pi pi-arrow-right"
+            iconPos="right"
+            (onClick)="nextCallback.emit()"
+            class="float-right"
+            [disabled]="forma.get('naziv')?.errors != null || forma.get('opis')?.errors != null"
+          />
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+    <p-stepperPanel header="Prioritet, rok i izvršitelj">
+      <ng-template
+        pTemplate="content"
+        let-prevCallback="prevCallback"
+        let-nextCallback="nextCallback"
+        let-index="index"
+      >
+        <div class="flex">
+          <p-selectButton
+            [options]="prioriteti"
+            optionLabel="prikaz"
+            optionValue="vrijednost"
+            formControlName="prioritet"
+          />
+        <p-floatLabel>
+          <p-calendar
+            appendTo="body"
+            [iconDisplay]="'input'"
+            [showIcon]="true"
+            [minDate]="dohvatiDanjasniDatum()"
+            formControlName="rok"
+          />
+          <label>Rok</label>
+        </p-floatLabel>
+          <p-dropdown
+            [options]="(korisnici$ | async)!"
+            optionLabel="prikaz"
+            optionValue="vrijednost"
+            placeholder="Izvršitelj"
+            formControlName="izvrsitelj"
+          />
+        </div>
+        <div>
+          <p-button
+            label="Natrag"
+            icon="pi pi-arrow-left"
+            (onClick)="prevCallback.emit()"
+          />
+          <p-button
+            label="Dodaj"
+            icon="pi pi-plus"
+            iconPos="right"
+            (onClick)="dodajZadatak()"
+            class="float-right"
+            [disabled]="forma.get('prioritet')?.errors != null || forma.get('rok')?.errors != null || forma.get('izvrsitelj')?.errors != null"
+          />
+        </div>
+      </ng-template>
+    </p-stepperPanel>
+  </p-stepper>
+</form>

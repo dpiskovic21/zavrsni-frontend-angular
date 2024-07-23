@@ -15,6 +15,8 @@ import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
 import { BadgeModule } from 'primeng/badge';
+import { TagModule } from 'primeng/tag';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -33,6 +35,7 @@ import { BadgeModule } from 'primeng/badge';
     DropdownModule,
     FileUploadModule,
     BadgeModule,
+    TagModule,
   ],
   exports: [
     CommonModule,
@@ -50,6 +53,7 @@ import { BadgeModule } from 'primeng/badge';
     DropdownModule,
     FileUploadModule,
     BadgeModule,
+    TagModule,
   ],
 })
 export class PrimengModule {}

@@ -1,5 +1,5 @@
 <ng-container *ngIf="zadatak$ | async as zadatak">
-  <p>{{ zadatak.prioritet }}</p>
+  <p-tag [value]="zadatak.prioritet" [style]="{'background-color' :getTagColor(zadatak.prioritet), color: 'black'}" />
   <p>{{ zadatak.status }}</p>
   <p>{{ zadatak.datumIzrade }}</p>
   <p *ngIf="zadatak.datumZavrsetka">{{ zadatak.datumZavrsetka }}</p>

@@ -16,6 +16,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
 import { BadgeModule } from 'primeng/badge';
 import { TagModule } from 'primeng/tag';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 
 @NgModule({
   declarations: [],
@@ -36,6 +38,8 @@ import { TagModule } from 'primeng/tag';
     FileUploadModule,
     BadgeModule,
     TagModule,
+    InputGroupModule,
+    InputGroupAddonModule,
   ],
   exports: [
     CommonModule,
@@ -54,6 +58,8 @@ import { TagModule } from 'primeng/tag';
     FileUploadModule,
     BadgeModule,
     TagModule,
+    InputGroupModule,
+    InputGroupAddonModule,
   ],
 })
 export class PrimengModule {}

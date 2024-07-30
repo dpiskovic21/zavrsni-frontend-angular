@@ -1,28 +1,59 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Zadatak } from '../../interfaces';
+import { KomentarDTO, Zadatak } from '../../interfaces';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { ZadatakService } from '../../services/zadatak.service';
 import { PrimengModule } from '../../../shared/modules/primeng/primeng.module';
+import { FormsModule } from '@angular/forms';
+import { KomentarService } from '../../services/komentar.service';
+import { AutorizacijaService } from '../../../autorizacija/services/autorizacija.service';
 
 @Component({
   selector: 'zadatak-detalji',
   standalone: true,
-  imports: [PrimengModule],
+  imports: [PrimengModule, FormsModule],
   templateUrl: './zadatak-detalji.component.html',
   styleUrl: './zadatak-detalji.component.css',
 })
 export class ZadatakDetaljiComponent implements OnInit {
-  zadatak$!: Observable<Zadatak>;
+  zadatak!: Zadatak;
+  noviKomentar = '';
 
   constructor(
     private config: DynamicDialogConfig,
-    private zadatakService: ZadatakService
+    private zadatakService: ZadatakService,
+    private komentarService: KomentarService,
+    private autorizacijaService: AutorizacijaService
   ) {}
 
   ngOnInit() {
-    this.zadatak$ = this.zadatakService.getZadatak(this.config.data.id);
+    this.dohvatiZadatak();
+  }
+
+  dohvatiZadatak() {
+    this.zadatakService
+      .getZadatak(this.config.data.id)
+      .subscribe((zadatak) => (this.zadatak = zadatak));
+  }
+
+  dodajKomentar() {
+    if (this.noviKomentar == '') return;
+
+    const komentarDTO: KomentarDTO = {
+      sadrzaj: this.noviKomentar,
+      korisnikId: this.autorizacijaService.prijavljeniKorisnik.id,
+      zadatakId: this.zadatak.id,
+    };
+
+    this.komentarService.postKomenatar(komentarDTO).subscribe({
+      next: () => {
+        this.dohvatiZadatak();
+        this.noviKomentar = '';
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   getTagColor(prioritet: string): string {

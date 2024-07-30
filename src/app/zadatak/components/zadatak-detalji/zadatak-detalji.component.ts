@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Zadatak } from '../../interfaces';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { CommonModule } from '@angular/common';
@@ -13,12 +13,15 @@ import { PrimengModule } from '../../../shared/modules/primeng/primeng.module';
   templateUrl: './zadatak-detalji.component.html',
   styleUrl: './zadatak-detalji.component.css',
 })
-export class ZadatakDetaljiComponent {
-  zadatak$: Observable<Zadatak>;
+export class ZadatakDetaljiComponent implements OnInit {
+  zadatak$!: Observable<Zadatak>;
+
   constructor(
     private config: DynamicDialogConfig,
     private zadatakService: ZadatakService
-  ) {
+  ) {}
+
+  ngOnInit() {
     this.zadatak$ = this.zadatakService.getZadatak(this.config.data.id);
   }
 

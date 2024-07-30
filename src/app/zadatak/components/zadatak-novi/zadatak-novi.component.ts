@@ -72,7 +72,7 @@ export class ZadatakNoviComponent {
     const { naziv, rok, opis, prioritet, izvrsitelj } = this.forma.value;
     const dto: ZadatakDTO = {
       projektId: +this.ruta.snapshot.paramMap.get('id')!,
-      izvjestiteljId: this.autorizacijaService.prijavljeniKorisnik.id,
+      izvjestiteljId: this.autorizacijaService.prijavljeniKorisnik?.id!,
       naziv,
       opis,
       rok,

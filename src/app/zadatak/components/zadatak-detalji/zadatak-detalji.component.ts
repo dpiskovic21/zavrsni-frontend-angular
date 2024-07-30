@@ -38,11 +38,11 @@ export class ZadatakDetaljiComponent implements OnInit {
       this.mozePoslatiNaPregled =
         this.zadatak.status == 'U_IZRADI' &&
         this.zadatak.izvrsiteljId ==
-          this.autorizacijaService.prijavljeniKorisnik.id;
+          this.autorizacijaService.prijavljeniKorisnik?.id;
       this.mozeZatvoriti =
         this.zadatak.status == 'NA_PREGLEDU' &&
         this.zadatak.izvrsiteljId ==
-          this.autorizacijaService.prijavljeniKorisnik.id;
+          this.autorizacijaService.prijavljeniKorisnik?.id;
     });
   }
 
@@ -82,7 +82,7 @@ export class ZadatakDetaljiComponent implements OnInit {
 
     const komentarDTO: KomentarDTO = {
       sadrzaj: this.noviKomentar,
-      korisnikId: this.autorizacijaService.prijavljeniKorisnik.id,
+      korisnikId: this.autorizacijaService.prijavljeniKorisnik?.id!,
       zadatakId: this.zadatak.id,
     };
 

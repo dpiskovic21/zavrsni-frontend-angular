@@ -47,7 +47,7 @@ export class ProjektNoviComponent {
     this.forma = new FormGroup({
       naziv: new FormControl('', [Validators.required]),
       voditelji: new FormControl(
-        [this.autorizacijaService.prijavljeniKorisnik.id],
+        [this.autorizacijaService.prijavljeniKorisnik?.id],
         [Validators.required, Validators.minLength(1)]
       ),
     });

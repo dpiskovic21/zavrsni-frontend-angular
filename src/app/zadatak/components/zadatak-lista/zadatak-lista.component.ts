@@ -69,7 +69,7 @@ export class ZadatakListaComponent implements OnInit {
             ? zadatak.status === 'ZATVOREN'
             : this.prikaz$.value === 'Moji'
             ? zadatak.izvrsiteljId ==
-              this.autorizacijaService.prijavljeniKorisnik.id
+              this.autorizacijaService.prijavljeniKorisnik?.id
             : true
         )
       ),

@@ -6,4 +6,5 @@ export interface Projekt {
   datumPocetka: Date;
   datumZavrsetka: Date | null;
   zadaci?: Zadatak[];
+  voditelji: { korisnikId: number }[];
 }

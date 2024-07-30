@@ -12,7 +12,7 @@ export class AutorizacijaService {
 
   constructor(private http: HttpClient) {}
 
-  get prijavljeniKorisnik() {
+  get prijavljeniKorisnik(): Korisnik | null {
     const korisnik = JSON.parse(localStorage.getItem('korisnik')!);
 
     if (!korisnik) {

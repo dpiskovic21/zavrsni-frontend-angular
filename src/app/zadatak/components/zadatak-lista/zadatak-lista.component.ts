@@ -64,9 +64,9 @@ export class ZadatakListaComponent implements OnInit {
       map((zadaci) =>
         zadaci.filter((zadatak) =>
           this.prikaz$.value === 'Aktivni'
-            ? zadatak.datumZavrsetka == null
+            ? zadatak.status === 'U_IZRADI'
             : this.prikaz$.value === 'Završeni'
-            ? zadatak.datumZavrsetka != null
+            ? zadatak.status === 'ZATVOREN'
             : this.prikaz$.value === 'Moji'
             ? zadatak.izvrsiteljId ==
               this.autorizacijaServce.prijavljeniKorisnik.id

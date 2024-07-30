@@ -3,8 +3,10 @@
   padding: 2.5rem;
 }
 
-.korisnici {
-  flex: 1;
+
+.osnovni-detalji {
   display: flex;
-  justify-content: end;
+  gap: 1rem;
+  justify-content: start;
+  align-items: center;
 }

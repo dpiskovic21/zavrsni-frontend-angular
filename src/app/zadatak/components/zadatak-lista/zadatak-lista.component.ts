@@ -119,7 +119,9 @@ export class ZadatakListaComponent implements OnInit {
   }
 
   otvoriDialogZaIzraduZadatka() {
-    this.ref = this.dialog.open(ZadatakNoviComponent, {});
+    this.ref = this.dialog.open(ZadatakNoviComponent, {
+      width: '75vw',
+    });
 
     this.ref.onClose.subscribe((dodanNovi) => {
       if (dodanNovi) this.dohvatiProjekte$.next();

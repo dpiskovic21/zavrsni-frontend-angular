@@ -1,7 +1,15 @@
-<zadatak-filter (pretraga)="onPretragaChange($event)" (sortiranje)="onSortiranjeChange($event)" (prikaz)="onPrikazChange($event)"></zadatak-filter>
+<zadatak-filter
+  (pretraga)="onPretragaChange($event)"
+  (sortiranje)="onSortiranjeChange($event)"
+  (prikaz)="onPrikazChange($event)"
+></zadatak-filter>
 
 @for (zadatak of (zadaci$ | async); track $index) {
 <zadatak-card [zadatak]="zadatak"></zadatak-card>
 }
 
-<p-button icon="pi pi-plus" (onClick)="otvoriDialogZaIzraduZadatka()" />
+<p-button
+  icon="pi pi-plus"
+  (onClick)="otvoriDialogZaIzraduZadatka()"
+  class="dodaj-gumb"
+/>

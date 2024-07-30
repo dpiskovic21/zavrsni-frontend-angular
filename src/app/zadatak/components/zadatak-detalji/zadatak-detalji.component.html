@@ -1,48 +1,51 @@
-<p-tag
-  [value]="zadatak.prioritet"
-  [style]="{
-    'background-color': getTagColor(zadatak.prioritet),
-    color: 'black'
-  }"
-/>
-<p>{{ zadatak.status }}</p>
-<p>{{ zadatak.datumIzrade }}</p>
-<p *ngIf="zadatak.datumZavrsetka">{{ zadatak.datumZavrsetka }}</p>
+@if (zadatak) {
 
-<div class="sadrzaj">
-  <div class="opis-komentari">
-    <p-editor [(ngModel)]="zadatak.opis" />
-    <div class="komentari">
-      <h3>Komentari</h3>
-      <p-inputGroup>
-        <input [(ngModel)]="noviKomentar" pInputText />
-        <button
-          (click)="dodajKomentar()"
-          pButton
-          type="button"
-          icon="pi pi-send"
-        ></button>
-      </p-inputGroup>
-
-      <div *ngFor="let komentar of zadatak.komentari">
-        <span
-          >{{ komentar.korisnik.ime + " " + komentar.korisnik.prezime }}
-          {{ komentar.datumIzrade | date : "MMM dd, yyyy hh:mm a" }}</span
-        >
-        <p>{{ komentar.sadrzaj }}</p>
-      </div>
-    </div>
-  </div>
-  <div class="korisnici">
-    <div class="korisnici-wrapper">
-      <p>
-        Izvjestitelj:
-        {{ zadatak.izvjestitelj.ime + " " + zadatak.izvjestitelj.prezime }}
-      </p>
-      <p>
-        Izvršitelj:
-        {{ zadatak.izvrsitelj.ime + " " + zadatak.izvrsitelj.prezime }}
-      </p>
-    </div>
+<div class="osnovni-detalji">
+  <p-tag
+    [value]="zadatak.prioritet"
+    [style]="{
+      'background-color': getTagColor(zadatak.prioritet),
+      color: 'black'
+    }"
+  />
+  <p>{{ zadatak.status }}</p>
+  <p>Napravljen: {{ zadatak.datumIzrade | date : "MMM dd, yyyy hh:mm a" }}</p>
+  <p *ngIf="zadatak.datumZavrsetka">
+    Završen: {{ zadatak.datumZavrsetka | date : "MMM dd, yyyy hh:mm a" }}
+  </p>
+</div>
+<div class="korisnici">
+  <div class="korisnici-wrapper">
+    <p>
+      Izvjestitelj:
+      {{ zadatak.izvjestitelj.ime + " " + zadatak.izvjestitelj.prezime }}
+    </p>
+    <p>
+      Izvršitelj:
+      {{ zadatak.izvrsitelj.ime + " " + zadatak.izvrsitelj.prezime }}
+    </p>
   </div>
 </div>
+
+<p-editor [(ngModel)]="zadatak.opis" />
+<div class="komentari">
+  <h3>Komentari</h3>
+  <p-inputGroup>
+    <input [(ngModel)]="noviKomentar" pInputText />
+    <button
+      (click)="dodajKomentar()"
+      pButton
+      type="button"
+      icon="pi pi-send"
+    ></button>
+  </p-inputGroup>
+
+  <div *ngFor="let komentar of zadatak.komentari">
+    <span
+      >{{ komentar.korisnik.ime + " " + komentar.korisnik.prezime }}
+      {{ komentar.datumIzrade | date : "MMM dd, yyyy hh:mm a" }}</span
+    >
+    <p>{{ komentar.sadrzaj }}</p>
+  </div>
+</div>
+}

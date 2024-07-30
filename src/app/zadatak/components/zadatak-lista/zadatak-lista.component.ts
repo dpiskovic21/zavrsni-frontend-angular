@@ -45,7 +45,7 @@ export class ZadatakListaComponent implements OnInit {
     private projektService: ProjektService,
     private ruta: ActivatedRoute,
     private dialog: DialogService,
-    private autorizacijaServce: AutorizacijaService
+    private autorizacijaService: AutorizacijaService
   ) {}
 
   ngOnInit() {
@@ -69,7 +69,7 @@ export class ZadatakListaComponent implements OnInit {
             ? zadatak.status === 'ZATVOREN'
             : this.prikaz$.value === 'Moji'
             ? zadatak.izvrsiteljId ==
-              this.autorizacijaServce.prijavljeniKorisnik.id
+              this.autorizacijaService.prijavljeniKorisnik.id
             : true
         )
       ),
@@ -91,6 +91,14 @@ export class ZadatakListaComponent implements OnInit {
             : new Date(a.datumIzrade).getMilliseconds() -
               new Date(b.datumIzrade).getMilliseconds()
         )
+      ),
+      map((zadaci) =>
+        zadaci.sort((a, b) => {
+          return (
+            this.dohvatiVrijednostZaStatus(a.status) -
+            this.dohvatiVrijednostZaStatus(b.status)
+          );
+        })
       )
     );
   }
@@ -126,5 +134,16 @@ export class ZadatakListaComponent implements OnInit {
     this.ref.onClose.subscribe((dodanNovi) => {
       if (dodanNovi) this.dohvatiProjekte$.next();
     });
+  }
+
+  dohvatiVrijednostZaStatus(status: string) {
+    switch (status) {
+      case 'U_IZRADI':
+        return 1;
+      case 'NA_PREGLEDU':
+        return 2;
+      default:
+        return 3;
+    }
   }
 }

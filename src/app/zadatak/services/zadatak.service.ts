@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { apiURL } from '../../app.config';
-import { Zadatak } from '../interfaces';
+import { UpdateZadatakDTO, Zadatak } from '../interfaces';
 import { ZadatakDTO } from '../interfaces/zadatak-dto';
 
 @Injectable({
@@ -18,5 +18,9 @@ export class ZadatakService {
 
   postZadatak(zadatak: ZadatakDTO) {
     return this.http.post<Zadatak>(this.url, zadatak);
+  }
+
+  updateZadatak(id: number, updateZadatakDTO: UpdateZadatakDTO) {
+    return this.http.patch<Zadatak>(`${this.url}/${id}`, updateZadatakDTO);
   }
 }

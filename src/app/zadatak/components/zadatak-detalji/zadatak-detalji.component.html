@@ -13,6 +13,12 @@
   <p *ngIf="zadatak.datumZavrsetka">
     Završen: {{ zadatak.datumZavrsetka | date : "MMM dd, yyyy hh:mm a" }}
   </p>
+  <button pButton *ngIf="mozePoslatiNaPregled" (click)="posaljiNaPregled()">
+    Pošalji na pregled
+  </button>
+  <button pButton *ngIf="mozeZatvoriti" (click)="zatvori()">
+    Zatvori zadatak
+  </button>
 </div>
 <div class="korisnici">
   <div class="korisnici-wrapper">

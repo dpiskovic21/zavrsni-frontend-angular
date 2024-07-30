@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { KomentarDTO, Zadatak } from '../../interfaces';
+import { KomentarDTO, UpdateZadatakDTO, Zadatak } from '../../interfaces';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { Observable } from 'rxjs';
 import { ZadatakService } from '../../services/zadatak.service';
@@ -18,6 +18,8 @@ import { AutorizacijaService } from '../../../autorizacija/services/autorizacija
 export class ZadatakDetaljiComponent implements OnInit {
   zadatak!: Zadatak;
   noviKomentar = '';
+  mozePoslatiNaPregled = false;
+  mozeZatvoriti = false;
 
   constructor(
     private config: DynamicDialogConfig,
@@ -31,9 +33,48 @@ export class ZadatakDetaljiComponent implements OnInit {
   }
 
   dohvatiZadatak() {
+    this.zadatakService.getZadatak(this.config.data.id).subscribe((zadatak) => {
+      this.zadatak = zadatak;
+      this.mozePoslatiNaPregled =
+        this.zadatak.status == 'U_IZRADI' &&
+        this.zadatak.izvrsiteljId ==
+          this.autorizacijaService.prijavljeniKorisnik.id;
+      this.mozeZatvoriti =
+        this.zadatak.status == 'NA_PREGLEDU' &&
+        this.zadatak.izvrsiteljId ==
+          this.autorizacijaService.prijavljeniKorisnik.id;
+    });
+  }
+
+  zatvori() {
+    const updateZadatakDTO: UpdateZadatakDTO = {
+      status: 'ZATVOREN',
+    };
     this.zadatakService
-      .getZadatak(this.config.data.id)
-      .subscribe((zadatak) => (this.zadatak = zadatak));
+      .updateZadatak(this.zadatak.id, updateZadatakDTO)
+      .subscribe({
+        next: () => {
+          console.log('Zadatak zatvoren');
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+  }
+  posaljiNaPregled() {
+    const updateZadatakDTO: UpdateZadatakDTO = {
+      status: 'NA_PREGLEDU',
+    };
+    this.zadatakService
+      .updateZadatak(this.zadatak.id, updateZadatakDTO)
+      .subscribe({
+        next: () => {
+          console.log('Zadatak na pregledu');
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
   }
 
   dodajKomentar() {

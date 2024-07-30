@@ -19,4 +19,11 @@ export const routes: Routes = [
     loadChildren: () =>
       import('../projekt/routes/projekt.routes').then((r) => r.projektRoutes),
   },
+  {
+    path: AppRute.Statistika,
+    loadChildren: () =>
+      import('../statistika/routes/statistika.routes').then(
+        (r) => r.statistikaRoutes
+      ),
+  },
 ];

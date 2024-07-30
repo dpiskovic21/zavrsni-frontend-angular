@@ -1,12 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Projekt } from '../../../projekt/interfaces';
+import { ProjektService } from '../../../projekt/services/projekt.service';
+import { AutorizacijaService } from '../../../autorizacija/services/autorizacija.service';
 
 @Component({
   selector: 'app-statistika-home',
   standalone: true,
   imports: [],
   templateUrl: './statistika-home.component.html',
-  styleUrl: './statistika-home.component.css'
+  styleUrl: './statistika-home.component.css',
 })
-export class StatistikaHomeComponent {
+export class StatistikaHomeComponent implements OnInit {
+  projekti!: Projekt[];
 
+  constructor(
+    private projektService: ProjektService,
+    private autorizacijaService: AutorizacijaService
+  ) {}
+
+  ngOnInit(): void {
+    this.projektService.getProjekti().subscribe((projekti) => {
+      console.log(projekti);
+      if (this.autorizacijaService.prijavljeniKorisnik?.admin) {
+        this.projekti = projekti;
+      } else
+        this.projekti = projekti.filter(
+          (projekt) =>
+            projekt.voditelji.find(
+              (voditelj: { korisnikId: number }) =>
+                voditelj.korisnikId ==
+                this.autorizacijaService.prijavljeniKorisnik?.id!
+            ) != null
+        );
+      console.log(this.projekti);
+    });
+  }
 }

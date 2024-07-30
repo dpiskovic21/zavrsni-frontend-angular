@@ -1,3 +1,21 @@
-<p-dropdown [options]="prikazi" optionLabel="ime" optionValue="ime" #prikazVrijednost (onChange)="prikaz.emit(prikazVrijednost.value)"></p-dropdown>
-<input type="text" pInputText #pretragaTekst (change)="pretraga.emit(pretragaTekst.value)" />
-<p-dropdown [options]="sortiranja" optionLabel="ime" optionValue="ime" #sortiranjeVrijednost (onChange)="sortiranje.emit(sortiranjeVrijednost.value)"></p-dropdown>
+<p-dropdown
+  [options]="prikazi"
+  optionLabel="ime"
+  optionValue="ime"
+  #prikazVrijednost
+  (onChange)="prikaz.emit(prikazVrijednost.value)"
+></p-dropdown>
+<input
+  type="text"
+  pInputText
+  #pretragaTekst
+  (input)="pretraga.emit(pretragaTekst.value)"
+  placeholder="Pretraga"
+/>
+<p-dropdown
+  [options]="sortiranja"
+  optionLabel="ime"
+  optionValue="ime"
+  #sortiranjeVrijednost
+  (onChange)="sortiranje.emit(sortiranjeVrijednost.value)"
+></p-dropdown>

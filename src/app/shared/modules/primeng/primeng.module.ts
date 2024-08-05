@@ -18,7 +18,7 @@ import { BadgeModule } from 'primeng/badge';
 import { TagModule } from 'primeng/tag';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
-
+import { ChartModule } from 'primeng/chart';
 @NgModule({
   declarations: [],
   imports: [
@@ -40,6 +40,7 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
     TagModule,
     InputGroupModule,
     InputGroupAddonModule,
+    ChartModule,
   ],
   exports: [
     CommonModule,
@@ -60,6 +61,7 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
     TagModule,
     InputGroupModule,
     InputGroupAddonModule,
+    ChartModule,
   ],
 })
 export class PrimengModule {}

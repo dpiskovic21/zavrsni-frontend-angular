@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { apiURL } from '../../app.config';
-import { CreateProjektDTO, Projekt } from '../interfaces';
+import { CreateProjektDTO, Projekt, ProjektStatistika } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -21,5 +21,9 @@ export class ProjektService {
 
   getProjekt(id: number) {
     return this.http.get<Projekt>(`${this.url}/${id}`);
+  }
+
+  getProjektStatistika(id: number) {
+    return this.http.get<ProjektStatistika>(`${this.url}/${id}/statistika`);
   }
 }

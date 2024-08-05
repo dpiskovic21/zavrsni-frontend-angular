@@ -1,1 +1,8 @@
-<p-dropdown [options]="projekti" optionLabel="naziv"> </p-dropdown>
+<p-dropdown
+  [options]="projekti"
+  optionLabel="naziv"
+  [(ngModel)]="odabraniProjekt"
+>
+</p-dropdown>
+
+<statistika-grafovi [odabraniProjekt]="odabraniProjekt"></statistika-grafovi>

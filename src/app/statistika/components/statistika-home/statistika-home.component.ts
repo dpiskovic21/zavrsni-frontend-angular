@@ -3,16 +3,19 @@ import { Projekt } from '../../../projekt/interfaces';
 import { ProjektService } from '../../../projekt/services/projekt.service';
 import { AutorizacijaService } from '../../../autorizacija/services/autorizacija.service';
 import { PrimengModule } from '../../../shared/modules/primeng/primeng.module';
+import { FormsModule } from '@angular/forms';
+import { StatistikaGrafoviComponent } from '../statistika-grafovi/statistika-grafovi.component';
 
 @Component({
   selector: 'app-statistika-home',
   standalone: true,
-  imports: [PrimengModule],
+  imports: [PrimengModule, FormsModule, StatistikaGrafoviComponent],
   templateUrl: './statistika-home.component.html',
   styleUrl: './statistika-home.component.css',
 })
 export class StatistikaHomeComponent implements OnInit {
   projekti!: Projekt[];
+  odabraniProjekt: Projekt | null = null;
 
   constructor(
     private projektService: ProjektService,

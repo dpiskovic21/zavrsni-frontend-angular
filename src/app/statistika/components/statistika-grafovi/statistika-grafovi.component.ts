@@ -14,8 +14,12 @@ export class StatistikaGrafoviComponent {
   projekt: Projekt | null = null;
   data: any = {
     labels: [],
-    datasets: [{ data: [], backgroundColor: [], hoverBackgroundColor: [] }],
+    datasets: [{ data: [], backgroundColor: [] }],
   };
+  getRandomColor() {
+    var color = Math.floor(0x1000000 * Math.random()).toString(16);
+    return '#' + ('000000' + color).slice(-6);
+  }
   options: any;
   @Input() set odabraniProjekt(p: Projekt | null) {
     console.log(p);
@@ -24,7 +28,8 @@ export class StatistikaGrafoviComponent {
       this.projektServis
         .getProjektStatistika(this.projekt?.id!)
         .subscribe((statistika) => {
-          console.log(statistika);
+          const documentStyle = getComputedStyle(document.documentElement);
+          const textColor = documentStyle.getPropertyValue('--text-color');
           for (const id in statistika.korisniciSaBrojemZadataka) {
             this.data.labels.push(
               statistika.korisniciSaBrojemZadataka[id].naziv
@@ -32,29 +37,23 @@ export class StatistikaGrafoviComponent {
             this.data.datasets[0].data.push(
               statistika.korisniciSaBrojemZadataka[id].brojZadataka
             );
-            this.data.datasets[0].backgroundColor.push('red');
-            this.data.datasets[0].hoverBackgroundColor.push('blue');
+            this.data.datasets[0].backgroundColor.push(this.getRandomColor());
           }
-          console.log(this.data);
+          this.options = {
+            plugins: {
+              legend: {
+                labels: {
+                  usePointStyle: true,
+                  color: textColor,
+                },
+              },
+            },
+          };
         });
     }
   }
 
   constructor(private projektServis: ProjektService) {}
 
-  ngOnInit() {
-    const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue('--text-color');
-
-    this.options = {
-      plugins: {
-        legend: {
-          labels: {
-            usePointStyle: true,
-            color: textColor,
-          },
-        },
-      },
-    };
-  }
+  ngOnInit() {}
 }

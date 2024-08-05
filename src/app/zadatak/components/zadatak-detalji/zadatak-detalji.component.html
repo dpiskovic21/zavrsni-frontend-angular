@@ -34,7 +34,11 @@
 </div>
 
 <div>
-  <privitak-lista [privitci]="zadatak.privitci"></privitak-lista>
+  <privitak-lista
+    [privitci]="zadatak.privitci"
+    [zadatakId]="zadatak.id"
+    (privitakUpload)="dohvatiZadatak()"
+  ></privitak-lista>
 </div>
 
 <p-editor [(ngModel)]="zadatak.opis" />

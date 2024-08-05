@@ -13,4 +13,8 @@ export class PrivitakService {
   getPrivitak(putanja: string) {
     return this.http.get<any>(`${this.url}/${putanja}`);
   }
+
+  postPrivitak(dto: any) {
+    return this.http.post<any>(this.url, dto);
+  }
 }

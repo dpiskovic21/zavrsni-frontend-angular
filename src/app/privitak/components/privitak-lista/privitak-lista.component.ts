@@ -1,17 +1,23 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PrivitakService } from '../../services/privitak.service';
 import { Privitak } from '../../../zadatak/interfaces';
-import { CommonModule } from '@angular/common';
+import { PrimengModule } from '../../../shared/modules/primeng/primeng.module';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { PrivitakUploadComponent } from '../privitak-upload/privitak-upload.component';
 
 @Component({
   selector: 'privitak-lista',
   standalone: true,
-  imports: [CommonModule],
+  imports: [PrimengModule, PrivitakUploadComponent],
+  providers: [DialogService],
   templateUrl: './privitak-lista.component.html',
   styleUrl: './privitak-lista.component.css',
 })
 export class PrivitakListaComponent {
   @Input() privitci!: Privitak[];
+  @Input() zadatakId!: number;
+  @Output() privitakUpload = new EventEmitter<void>();
+  ref: DynamicDialogRef | undefined;
 
   constructor(private privitakService: PrivitakService) {}
 

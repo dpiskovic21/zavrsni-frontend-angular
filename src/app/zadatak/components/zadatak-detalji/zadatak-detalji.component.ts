@@ -1,17 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { KomentarDTO, UpdateZadatakDTO, Zadatak } from '../../interfaces';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { Observable } from 'rxjs';
 import { ZadatakService } from '../../services/zadatak.service';
 import { PrimengModule } from '../../../shared/modules/primeng/primeng.module';
 import { FormsModule } from '@angular/forms';
 import { KomentarService } from '../../services/komentar.service';
 import { AutorizacijaService } from '../../../autorizacija/services/autorizacija.service';
+import { PrivitakListaComponent } from '../../../privitak/components/privitak-lista/privitak-lista.component';
 
 @Component({
   selector: 'zadatak-detalji',
   standalone: true,
-  imports: [PrimengModule, FormsModule],
+  imports: [PrimengModule, FormsModule, PrivitakListaComponent],
   templateUrl: './zadatak-detalji.component.html',
   styleUrl: './zadatak-detalji.component.css',
 })

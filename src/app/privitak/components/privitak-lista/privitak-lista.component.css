@@ -1,0 +1,16 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    gap:0.5rem;
+    border: 1px solid black;
+    width: fit-content;
+    padding: 0.25rem 2rem;
+}
+
+a{
+    width: 100%;
+}
+
+a:hover {
+    cursor:pointer;
+}

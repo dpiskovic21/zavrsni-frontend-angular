@@ -1,5 +1,5 @@
+import { Privitak, Komentar } from '.';
 import { Korisnik } from '../../korisnik/interfaces';
-import { Komentar } from './komentar';
 
 export interface Zadatak {
   id: number;
@@ -17,5 +17,5 @@ export interface Zadatak {
   izvrsitelj: Partial<Korisnik>;
   izvjestitelj: Partial<Korisnik>;
   komentari: Komentar[];
-  privitci: any[];
+  privitci: Privitak[];
 }

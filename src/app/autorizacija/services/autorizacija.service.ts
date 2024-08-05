@@ -25,4 +25,8 @@ export class AutorizacijaService {
   prijava(dto: PrijavaDTO) {
     return this.http.post<Korisnik>(this.url + '/prijava', dto);
   }
+
+  odjava() {
+    localStorage.removeItem('korisnik');
+  }
 }

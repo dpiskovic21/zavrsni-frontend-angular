@@ -23,14 +23,26 @@
 </div>
 <div class="korisnici-privitci">
   <div class="korisnici">
-    <p>
+    <p style="margin-bottom: 1.5rem">
       Izvjestitelj:
       {{ zadatak.izvjestitelj.ime + " " + zadatak.izvjestitelj.prezime }}
     </p>
-    <p>
+    <p *ngIf="mozePromjenitiIzvrsitelja == false">
       Izvršitelj:
       {{ zadatak.izvrsitelj.ime + " " + zadatak.izvrsitelj.prezime }}
     </p>
+    <p-floatLabel>
+      <p-dropdown
+        *ngIf="mozePromjenitiIzvrsitelja"
+        [options]="korisnici"
+        optionLabel="naziv"
+        [(ngModel)]="zadatak.izvrsiteljId"
+        (onChange)="promjeniIzvrsitelja()"
+        optionValue="id"
+        id="izvrsitelj"
+      />
+      <label for="izvrsitelj">Izvršitelj</label>
+    </p-floatLabel>
   </div>
 
   <privitak-lista

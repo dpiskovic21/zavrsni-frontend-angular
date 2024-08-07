@@ -15,6 +15,10 @@ import { AutorizacijaService } from '../../../autorizacija/services/autorizacija
 import { PrivitakListaComponent } from '../../../privitak/components/privitak-lista/privitak-lista.component';
 import { ZadatakPrioritetChipComponent } from '../zadatak-prioritet-chip/zadatak-prioritet-chip.component';
 import { Editor } from 'primeng/editor';
+import { Korisnik } from '../../../korisnik/interfaces';
+import { KorisnikService } from '../../../korisnik/services/korisnik.service';
+
+type KorisnikNaziv = Korisnik | { naziv: string };
 
 @Component({
   selector: 'zadatak-detalji',
@@ -30,11 +34,13 @@ import { Editor } from 'primeng/editor';
 })
 export class ZadatakDetaljiComponent implements OnInit {
   zadatak!: Zadatak;
+  korisnici: KorisnikNaziv[] = [];
   noviKomentar = '';
   mozePoslatiNaPregled = false;
   mozeZatvoritiIliVratitiNaDoradu = false;
   mozeDodatiPrivitak = false;
   trebaAzuriratiOpis = false;
+  mozePromjenitiIzvrsitelja = false;
   @ViewChild('editor', { static: false }) editor!: Editor;
 
   constructor(
@@ -43,7 +49,8 @@ export class ZadatakDetaljiComponent implements OnInit {
     private zadatakService: ZadatakService,
     private komentarService: KomentarService,
     private autorizacijaService: AutorizacijaService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private korisnikService: KorisnikService
   ) {}
 
   ngOnInit() {
@@ -56,7 +63,7 @@ export class ZadatakDetaljiComponent implements OnInit {
       this.renderer.listen(editorElement, 'blur', () => {
         this.updateOpis();
       });
-    }, 100);
+    }, 500);
   }
 
   dohvatiZadatak() {
@@ -75,6 +82,18 @@ export class ZadatakDetaljiComponent implements OnInit {
           this.autorizacijaService.prijavljeniKorisnik?.id ||
         this.zadatak.izvrsiteljId ==
           this.autorizacijaService.prijavljeniKorisnik?.id;
+      this.mozePromjenitiIzvrsitelja =
+        this.zadatak.izvjestiteljId ==
+        this.autorizacijaService.prijavljeniKorisnik?.id;
+
+      if (this.mozePromjenitiIzvrsitelja) {
+        this.korisnikService.getKorisnici().subscribe((korisnici) => {
+          this.korisnici = korisnici.map((korisnik) => {
+            const naziv = korisnik.ime + ' ' + korisnik.prezime;
+            return { ...korisnik, naziv };
+          });
+        });
+      }
     });
   }
 
@@ -159,6 +178,22 @@ export class ZadatakDetaljiComponent implements OnInit {
         next: () => {
           console.log('Zadatak opis ažuriran');
           this.trebaAzuriratiOpis = false;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+  }
+
+  promjeniIzvrsitelja() {
+    const updateZadatakDTO: UpdateZadatakDTO = {
+      izvrsiteljId: this.zadatak.izvrsiteljId,
+    };
+    this.zadatakService
+      .updateZadatak(this.zadatak.id, updateZadatakDTO)
+      .subscribe({
+        next: () => {
+          console.log('Izvrsitelj  ažuriran');
         },
         error: (err) => {
           console.log(err);

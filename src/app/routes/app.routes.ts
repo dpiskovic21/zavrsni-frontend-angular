@@ -26,4 +26,9 @@ export const routes: Routes = [
         (r) => r.statistikaRoutes
       ),
   },
+  {
+    path: AppRute.Admin,
+    loadChildren: () =>
+      import('../admin/routes/admin.routes').then((r) => r.adminRoutes),
+  },
 ];

@@ -5,7 +5,10 @@
 ></zadatak-filter>
 
 @for (zadatak of (zadaci$ | async); track $index) {
-<zadatak-card [zadatak]="zadatak"></zadatak-card>
+<zadatak-card
+  [zadatak]="zadatak"
+  (zadatakIzmjenjen)="dohvatiProjekte$.next()"
+></zadatak-card>
 }
 
 <p-button

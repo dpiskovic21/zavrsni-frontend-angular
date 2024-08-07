@@ -16,7 +16,14 @@
   <button pButton *ngIf="mozePoslatiNaPregled" (click)="posaljiNaPregled()">
     Pošalji na pregled
   </button>
-  <button pButton *ngIf="mozeZatvoriti" (click)="zatvori()">
+  <button
+    pButton
+    *ngIf="mozeZatvoritiIliVratitiNaDoradu"
+    (click)="vratiNaDoradu()"
+  >
+    Vrati na doradu
+  </button>
+  <button pButton *ngIf="mozeZatvoritiIliVratitiNaDoradu" (click)="zatvori()">
     Zatvori zadatak
   </button>
 </div>

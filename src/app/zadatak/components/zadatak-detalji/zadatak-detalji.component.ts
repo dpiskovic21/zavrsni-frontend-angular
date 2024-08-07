@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { KomentarDTO, UpdateZadatakDTO, Zadatak } from '../../interfaces';
-import { DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ZadatakService } from '../../services/zadatak.service';
 import { PrimengModule } from '../../../shared/modules/primeng/primeng.module';
 import { FormsModule } from '@angular/forms';
@@ -19,10 +19,11 @@ export class ZadatakDetaljiComponent implements OnInit {
   zadatak!: Zadatak;
   noviKomentar = '';
   mozePoslatiNaPregled = false;
-  mozeZatvoriti = false;
+  mozeZatvoritiIliVratitiNaDoradu = false;
 
   constructor(
     private config: DynamicDialogConfig,
+    private ref: DynamicDialogRef,
     private zadatakService: ZadatakService,
     private komentarService: KomentarService,
     private autorizacijaService: AutorizacijaService
@@ -39,11 +40,28 @@ export class ZadatakDetaljiComponent implements OnInit {
         this.zadatak.status == 'U_IZRADI' &&
         this.zadatak.izvrsiteljId ==
           this.autorizacijaService.prijavljeniKorisnik?.id;
-      this.mozeZatvoriti =
+      this.mozeZatvoritiIliVratitiNaDoradu =
         this.zadatak.status == 'NA_PREGLEDU' &&
-        this.zadatak.izvrsiteljId ==
+        this.zadatak.izvjestiteljId ==
           this.autorizacijaService.prijavljeniKorisnik?.id;
     });
+  }
+
+  vratiNaDoradu() {
+    const updateZadatakDTO: UpdateZadatakDTO = {
+      status: 'U_IZRADI',
+    };
+    this.zadatakService
+      .updateZadatak(this.zadatak.id, updateZadatakDTO)
+      .subscribe({
+        next: () => {
+          this.ref.close(true);
+          console.log('Zadatak natrag u izradi');
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
   }
 
   zatvori() {
@@ -54,6 +72,7 @@ export class ZadatakDetaljiComponent implements OnInit {
       .updateZadatak(this.zadatak.id, updateZadatakDTO)
       .subscribe({
         next: () => {
+          this.ref.close(true);
           console.log('Zadatak zatvoren');
         },
         error: (err) => {
@@ -69,6 +88,7 @@ export class ZadatakDetaljiComponent implements OnInit {
       .updateZadatak(this.zadatak.id, updateZadatakDTO)
       .subscribe({
         next: () => {
+          this.ref.close(true);
           console.log('Zadatak na pregledu');
         },
         error: (err) => {

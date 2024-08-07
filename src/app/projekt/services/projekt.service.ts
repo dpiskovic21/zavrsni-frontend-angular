@@ -23,8 +23,14 @@ export class ProjektService {
     return this.http.get<Projekt>(`${this.url}/${id}`);
   }
 
-  getProjektStatistika(id: number) {
-    return this.http.get<ProjektStatistika>(`${this.url}/${id}/statistika`);
+  getProjektStatistika(id: number, datum: Date | null = null) {
+    let datumQuery = '';
+    if (datum) {
+      datumQuery = `?datum=${datum.toISOString()}`;
+    }
+    return this.http.get<ProjektStatistika>(
+      `${this.url}/${id}/statistika${datumQuery}`
+    );
   }
 
   deleteProjekt(id: string) {

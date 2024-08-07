@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { Projekt } from '../../../projekt/interfaces';
 import { PrimengModule } from '../../../shared/modules/primeng/primeng.module';
 import { ProjektService } from '../../../projekt/services/projekt.service';
+import { FormsModule } from '@angular/forms';
+import { AutorizacijaService } from '../../../autorizacija/services/autorizacija.service';
 
 interface GrafPodaci {
   labels: string[];
@@ -11,19 +13,24 @@ interface GrafPodaci {
 @Component({
   selector: 'statistika-grafovi',
   standalone: true,
-  imports: [PrimengModule],
+  imports: [PrimengModule, FormsModule],
   templateUrl: './statistika-grafovi.component.html',
   styleUrl: './statistika-grafovi.component.css',
 })
 export class StatistikaGrafoviComponent {
   brojZadatakaPoKorisniku!: GrafPodaci;
   zakasnjeliRokovi!: GrafPodaci;
-
-  constructor(private projektServis: ProjektService) {}
+  danas = new Date();
+  filterDatum: Date | null = null;
+  odabraniProjektId: number | null = null;
+  constructor(
+    private projektServis: ProjektService,
+    private autorizacijaServis: AutorizacijaService
+  ) {}
 
   @Input() set odabraniProjekt(projekt: Projekt | null) {
     if (projekt == null) return;
-
+    this.odabraniProjektId = projekt.id;
     this.projektServis
       .getProjektStatistika(projekt.id)
       .subscribe((statistika) => {
@@ -87,5 +94,23 @@ export class StatistikaGrafoviComponent {
   getNasumicnaBoja() {
     var color = Math.floor(0x1000000 * Math.random()).toString(16);
     return '#' + color;
+  }
+
+  onDatumChange() {
+    this.projektServis
+      .getProjektStatistika(this.odabraniProjektId!, this.filterDatum!)
+      .subscribe((statistika) => {
+        this.postaviPodatkeZaBrojZadatakaPoKorisniku(
+          statistika.korisniciSaBrojemZadataka
+        );
+        this.postaviPodatkeZaZakasnjeljeRokove(statistika.zakasnjeliRokovi);
+      });
+  }
+
+  prikaziKalendarZaFiltirirnje(): any {
+    return (
+      this.odabraniProjektId !== null &&
+      this.autorizacijaServis.prijavljeniKorisnik?.admin == true
+    );
   }
 }

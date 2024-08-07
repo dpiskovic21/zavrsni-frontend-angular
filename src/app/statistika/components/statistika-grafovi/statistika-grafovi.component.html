@@ -1,3 +1,14 @@
+<p-calendar
+  *ngIf="prikaziKalendarZaFiltirirnje()"
+  [(ngModel)]="filterDatum"
+  view="month"
+  dateFormat="mm/yy"
+  [readonlyInput]="true"
+  (ngModelChange)="onDatumChange()"
+  [maxDate]="danas"
+  placeholder="Datum"
+/>
+
 <div class="graf">
   <h3>Broj zadataka po korisniku</h3>
   <p-chart type="pie" [data]="brojZadatakaPoKorisniku" />

@@ -14,7 +14,7 @@ import { StatistikaGrafoviComponent } from '../statistika-grafovi/statistika-gra
   styleUrl: './statistika-home.component.css',
 })
 export class StatistikaHomeComponent implements OnInit {
-  projekti!: Projekt[];
+  projekti!: Partial<Projekt>[];
   odabraniProjekt: Projekt | null = null;
 
   constructor(
@@ -26,6 +26,7 @@ export class StatistikaHomeComponent implements OnInit {
     this.projektService.getProjekti().subscribe((projekti) => {
       if (this.autorizacijaService.prijavljeniKorisnik?.admin) {
         this.projekti = projekti;
+        this.projekti.unshift({ naziv: 'Svi projekti', id: -1 });
       } else
         this.projekti = projekti.filter(
           (projekt) =>

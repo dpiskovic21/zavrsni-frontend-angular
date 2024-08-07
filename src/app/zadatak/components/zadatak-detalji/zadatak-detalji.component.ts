@@ -1,4 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 import { KomentarDTO, UpdateZadatakDTO, Zadatak } from '../../interfaces';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ZadatakService } from '../../services/zadatak.service';
@@ -8,6 +14,7 @@ import { KomentarService } from '../../services/komentar.service';
 import { AutorizacijaService } from '../../../autorizacija/services/autorizacija.service';
 import { PrivitakListaComponent } from '../../../privitak/components/privitak-lista/privitak-lista.component';
 import { ZadatakPrioritetChipComponent } from '../zadatak-prioritet-chip/zadatak-prioritet-chip.component';
+import { Editor } from 'primeng/editor';
 
 @Component({
   selector: 'zadatak-detalji',
@@ -26,17 +33,29 @@ export class ZadatakDetaljiComponent implements OnInit {
   noviKomentar = '';
   mozePoslatiNaPregled = false;
   mozeZatvoritiIliVratitiNaDoradu = false;
+  trebaAzuriratiOpis = false;
+  @ViewChild('editor', { static: false }) editor!: Editor;
 
   constructor(
     private config: DynamicDialogConfig,
     private ref: DynamicDialogRef,
     private zadatakService: ZadatakService,
     private komentarService: KomentarService,
-    private autorizacijaService: AutorizacijaService
+    private autorizacijaService: AutorizacijaService,
+    private renderer: Renderer2
   ) {}
 
   ngOnInit() {
     this.dohvatiZadatak();
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      const editorElement = this.editor.getQuill().root;
+      this.renderer.listen(editorElement, 'blur', () => {
+        this.updateOpis();
+      });
+    }, 100);
   }
 
   dohvatiZadatak() {
@@ -121,5 +140,23 @@ export class ZadatakDetaljiComponent implements OnInit {
         console.log(err);
       },
     });
+  }
+
+  updateOpis() {
+    if (!this.trebaAzuriratiOpis) return;
+    const updateZadatakDTO: UpdateZadatakDTO = {
+      opis: this.zadatak.opis,
+    };
+    this.zadatakService
+      .updateZadatak(this.zadatak.id, updateZadatakDTO)
+      .subscribe({
+        next: () => {
+          console.log('Zadatak opis ažuriran');
+          this.trebaAzuriratiOpis = false;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
   }
 }

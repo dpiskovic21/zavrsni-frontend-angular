@@ -40,7 +40,11 @@
   ></privitak-lista>
 </div>
 
-<p-editor [(ngModel)]="zadatak.opis" />
+<p-editor
+  #editor
+  [(ngModel)]="zadatak.opis"
+  (onTextChange)="trebaAzuriratiOpis = true"
+/>
 <div class="komentari">
   <h3>Komentari</h3>
   <p-inputGroup>

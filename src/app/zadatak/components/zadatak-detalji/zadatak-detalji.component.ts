@@ -33,6 +33,7 @@ export class ZadatakDetaljiComponent implements OnInit {
   noviKomentar = '';
   mozePoslatiNaPregled = false;
   mozeZatvoritiIliVratitiNaDoradu = false;
+  mozeDodatiPrivitak = false;
   trebaAzuriratiOpis = false;
   @ViewChild('editor', { static: false }) editor!: Editor;
 
@@ -68,6 +69,11 @@ export class ZadatakDetaljiComponent implements OnInit {
       this.mozeZatvoritiIliVratitiNaDoradu =
         this.zadatak.status == 'NA_PREGLEDU' &&
         this.zadatak.izvjestiteljId ==
+          this.autorizacijaService.prijavljeniKorisnik?.id;
+      this.mozeDodatiPrivitak =
+        this.zadatak.izvjestiteljId ==
+          this.autorizacijaService.prijavljeniKorisnik?.id ||
+        this.zadatak.izvrsiteljId ==
           this.autorizacijaService.prijavljeniKorisnik?.id;
     });
   }

@@ -38,7 +38,7 @@ export class ZadatakListaComponent implements OnInit {
   prikaz$!: BehaviorSubject<string>;
   sortiranje$!: BehaviorSubject<string>;
   pretraga$!: BehaviorSubject<string>;
-
+  mozeDodatiZadatak = false;
   ref: DynamicDialogRef | undefined;
 
   constructor(
@@ -60,6 +60,14 @@ export class ZadatakListaComponent implements OnInit {
         this.projektService.getProjekt(+this.ruta.snapshot.paramMap.get('id')!)
       ),
       filter((projekt) => !!projekt),
+      tap((projekt) => {
+        this.mozeDodatiZadatak =
+          projekt.voditelji.find(
+            (voditelj) =>
+              this.autorizacijaService.prijavljeniKorisnik?.id ==
+              voditelj.korisnikId
+          ) != null;
+      }),
       map((projekt) => projekt?.zadaci!),
       map((zadaci) =>
         zadaci.filter((zadatak) =>

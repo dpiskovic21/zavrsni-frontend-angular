@@ -4,6 +4,7 @@
   </a>
 </div>
 <privitak-upload
+  *ngIf="mozeDodati"
   [zadatakId]="zadatakId"
   (privitakUpload)="privitakUpload.emit()"
 ></privitak-upload>

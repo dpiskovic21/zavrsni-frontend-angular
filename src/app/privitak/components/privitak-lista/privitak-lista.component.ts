@@ -16,6 +16,7 @@ import { PrivitakUploadComponent } from '../privitak-upload/privitak-upload.comp
 export class PrivitakListaComponent {
   @Input() privitci!: Privitak[];
   @Input() zadatakId!: number;
+  @Input() mozeDodati = false;
   @Output() privitakUpload = new EventEmitter<void>();
   ref: DynamicDialogRef | undefined;
 

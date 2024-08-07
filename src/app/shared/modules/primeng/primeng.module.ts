@@ -20,6 +20,7 @@ import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { ChartModule } from 'primeng/chart';
 import { TableModule } from 'primeng/table';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   declarations: [],
@@ -44,6 +45,7 @@ import { TableModule } from 'primeng/table';
     InputGroupAddonModule,
     ChartModule,
     TableModule,
+    CheckboxModule,
   ],
   exports: [
     CommonModule,
@@ -66,6 +68,7 @@ import { TableModule } from 'primeng/table';
     InputGroupAddonModule,
     ChartModule,
     TableModule,
+    CheckboxModule,
   ],
 })
 export class PrimengModule {}

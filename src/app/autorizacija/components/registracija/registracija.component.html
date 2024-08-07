@@ -1,0 +1,24 @@
+<form [formGroup]="forma" (ngSubmit)="registracija()">
+  <p-floatLabel>
+    <input pInputText formControlName="ime" id="ime" />
+    <label for="ime">Ime</label>
+  </p-floatLabel>
+  <p-floatLabel>
+    <input pInputText formControlName="prezime" id="prezime" />
+    <label for="prezime">Prezime</label>
+  </p-floatLabel>
+  <p-floatLabel>
+    <input pInputText formControlName="email" id="email" />
+    <label for="email">Email</label>
+  </p-floatLabel>
+  <p-floatLabel>
+    <input pInputText formControlName="lozinka" id="lozinka" />
+    <label for="lozinka">Lozinka</label>
+  </p-floatLabel>
+  <p-checkbox
+    formControlName="admin"
+    [binary]="true"
+    label="Admin"
+  ></p-checkbox>
+  <p-button label="Registracija" type="submit"></p-button>
+</form>

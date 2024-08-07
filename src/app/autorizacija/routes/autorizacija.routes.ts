@@ -14,4 +14,11 @@ export const autorizacijaRoutes: Routes = [
         (c) => c.PrijavaComponent
       ),
   },
+  {
+    path: AutorizacijaRoute.Registracija,
+    loadComponent: () =>
+      import('../components/registracija/registracija.component').then(
+        (c) => c.RegistracijaComponent
+      ),
+  },
 ];

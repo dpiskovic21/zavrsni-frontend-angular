@@ -10,6 +10,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppRute } from '../../../routes/app-rute';
+import { AutorizacijaRoute } from '../../routes/autorizacija-rute';
 
 @Component({
   selector: 'app-prijava',
@@ -32,6 +33,12 @@ export class PrijavaComponent {
       email: new FormControl('', [Validators.required, Validators.email]),
       lozinka: new FormControl('', [Validators.required]),
     });
+  }
+
+  navigirajNaRegistraciju() {
+    this.ruter.navigateByUrl(
+      `${AppRute.Autorizacija}/${AutorizacijaRoute.Registracija}`
+    );
   }
 
   prijaviSe() {

@@ -36,4 +36,8 @@ export class ProjektService {
   deleteProjekt(id: string) {
     return this.http.delete(`${this.url}/${id}`);
   }
+
+  updateProjekt(id: number, dto: any) {
+    return this.http.patch(`${this.url}/${id}`, dto);
+  }
 }

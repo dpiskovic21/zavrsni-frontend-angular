@@ -1,0 +1,25 @@
+@if(projekt) {
+<p-floatLabel>
+  <input pInputText type="text" [(ngModel)]="projekt.naziv" />
+  <label for="float-label">Naziv projekta</label>
+</p-floatLabel>
+<p-floatLabel>
+  <p-multiSelect
+    inputId="float-label"
+    [options]="korisnici"
+    optionLabel="naziv"
+    optionValue="id"
+    [(ngModel)]="voditelji"
+  />
+  <label for="float-label">Voditelji projekta</label>
+</p-floatLabel>
+
+<p-selectButton
+  [options]="moguciStatusi"
+  optionLabel="label"
+  optionValue="value"
+  [(ngModel)]="projekt.status"
+/>
+
+<p-button lable="Spremi" (onClick)="spremiIzmjene()" />
+}

@@ -1,10 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  Renderer2,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { KomentarDTO, UpdateZadatakDTO, Zadatak } from '../../interfaces';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ZadatakService } from '../../services/zadatak.service';
@@ -15,10 +9,8 @@ import { AutorizacijaService } from '../../../autorizacija/services/autorizacija
 import { PrivitakListaComponent } from '../../../privitak/components/privitak-lista/privitak-lista.component';
 import { ZadatakPrioritetChipComponent } from '../zadatak-prioritet-chip/zadatak-prioritet-chip.component';
 import { Editor } from 'primeng/editor';
-import { Korisnik } from '../../../korisnik/interfaces';
 import { KorisnikService } from '../../../korisnik/services/korisnik.service';
-
-type KorisnikNaziv = Korisnik | { naziv: string };
+import { KorisnikNaziv } from '../../../korisnik/interfaces';
 
 @Component({
   selector: 'zadatak-detalji',

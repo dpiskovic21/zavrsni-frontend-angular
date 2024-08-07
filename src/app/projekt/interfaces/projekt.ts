@@ -6,5 +6,6 @@ export interface Projekt {
   datumPocetka: Date;
   datumZavrsetka: Date | null;
   zadaci?: Zadatak[];
+  status: 'U_TIJEKU' | 'ZAVRSEN' | 'OTKAZAN';
   voditelji: { korisnikId: number }[];
 }

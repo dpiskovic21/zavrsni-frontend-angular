@@ -2,5 +2,6 @@
   <p>Započet: {{ projekt.datumPocetka | date }}</p>
   <ng-template pTemplate="footer">
     <p-button label="Otvori" (onClick)="preusmjeriNaZadatke()" />
+    <p-button icon="pi pi-cog" (onClick)="otovriDialogZaDetalje()" />
   </ng-template>
 </p-card>

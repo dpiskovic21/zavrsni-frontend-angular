@@ -1,8 +1,9 @@
-<h5>Privitci</h5>
+<div class="privitak-lista">
+  <a *ngFor="let privitak of privitci" (click)="preuzmiPrivitak(privitak)">
+    {{ privitak.naziv }}
+  </a>
+</div>
 <privitak-upload
   [zadatakId]="zadatakId"
   (privitakUpload)="privitakUpload.emit()"
 ></privitak-upload>
-<a *ngFor="let privitak of privitci" (click)="preuzmiPrivitak(privitak)">
-  {{ privitak.naziv }}
-</a>

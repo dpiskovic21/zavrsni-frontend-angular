@@ -21,8 +21,8 @@
     Zatvori zadatak
   </button>
 </div>
-<div class="korisnici">
-  <div class="korisnici-wrapper">
+<div class="korisnici-privitci">
+  <div class="korisnici">
     <p>
       Izvjestitelj:
       {{ zadatak.izvjestitelj.ime + " " + zadatak.izvjestitelj.prezime }}
@@ -32,9 +32,7 @@
       {{ zadatak.izvrsitelj.ime + " " + zadatak.izvrsitelj.prezime }}
     </p>
   </div>
-</div>
 
-<div>
   <privitak-lista
     [privitci]="zadatak.privitci"
     [zadatakId]="zadatak.id"

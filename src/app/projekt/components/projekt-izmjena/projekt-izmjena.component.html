@@ -1,7 +1,8 @@
 @if(projekt) {
+<div style="margin-bottom: 1rem"></div>
 <p-floatLabel>
-  <input pInputText type="text" [(ngModel)]="projekt.naziv" />
-  <label for="float-label">Naziv projekta</label>
+  <input pInputText type="text" [(ngModel)]="projekt.naziv" id="naziv" />
+  <label for="naziv">Naziv projekta</label>
 </p-floatLabel>
 <p-floatLabel>
   <p-multiSelect
@@ -14,12 +15,15 @@
   <label for="float-label">Voditelji projekta</label>
 </p-floatLabel>
 
-<p-selectButton
-  [options]="moguciStatusi"
-  optionLabel="label"
-  optionValue="value"
-  [(ngModel)]="projekt.status"
-/>
-
-<p-button lable="Spremi" (onClick)="spremiIzmjene()" />
+<div class="status">
+  <label for="statsu">Status projekta</label>
+  <p-selectButton
+    [options]="moguciStatusi"
+    optionLabel="label"
+    optionValue="value"
+    [(ngModel)]="projekt.status"
+    id="statsu"
+  />
+</div>
+<p-button label="Spremi" (onClick)="spremiIzmjene()" class="submit" />
 }

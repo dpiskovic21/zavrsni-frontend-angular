@@ -2,10 +2,10 @@
   <a [routerLink]="rute.Projekt" routerLinkActive="active">Projekti</a>
   <a [routerLink]="rute.Statistika" routerLinkActive="active">Statistika</a>
   <a
-    *ngIf="prijavljeniKorisnikJeAdmin"
+    *ngIf="prijavljeniKorisnikJeAdmin()"
     [routerLink]="rute.Admin"
     routerLinkActive="active"
-    >Adminstratorsko sučelje</a
+    >Admin panel</a
   >
   <a (click)="odjava()">Odjava</a>
 </nav>

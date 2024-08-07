@@ -1,6 +1,8 @@
-<a [routerLink]="rute.Korisnici">Korisnici</a>
-<a [routerLink]="rute.Projekti">Projekti</a>
-<a [routerLink]="rute.Zadatci">Zadatci</a>
-<a [routerLink]="rute.Komentari">Komentari</a>
-<a [routerLink]="rute.Privitci">Privitci</a>
+<div class="wrapper">
+  <a [routerLink]="rute.Korisnici" routerLinkActive="active">Korisnici</a>
+  <a [routerLink]="rute.Projekti" routerLinkActive="active">Projekti</a>
+  <a [routerLink]="rute.Zadatci" routerLinkActive="active">Zadatci</a>
+  <a [routerLink]="rute.Komentari" routerLinkActive="active">Komentari</a>
+  <a [routerLink]="rute.Privitci" routerLinkActive="active">Privitci</a>
+</div>
 <router-outlet></router-outlet>

@@ -1,13 +1,7 @@
 @if (zadatak) {
 
 <div class="osnovni-detalji">
-  <p-tag
-    [value]="zadatak.prioritet"
-    [style]="{
-      'background-color': getTagColor(zadatak.prioritet),
-      color: 'black'
-    }"
-  />
+  <zadatak-prioritet-chip [prioritet]="zadatak.prioritet" />
   <p>{{ zadatak.status }}</p>
   <p>Napravljen: {{ zadatak.datumIzrade | date : "MMM dd, yyyy hh:mm a" }}</p>
   <p *ngIf="zadatak.datumZavrsetka">

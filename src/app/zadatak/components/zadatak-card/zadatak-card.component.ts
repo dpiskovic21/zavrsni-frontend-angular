@@ -3,11 +3,12 @@ import { Zadatak } from '../../interfaces';
 import { PrimengModule } from '../../../shared/modules/primeng/primeng.module';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ZadatakDetaljiComponent } from '../zadatak-detalji/zadatak-detalji.component';
+import { ZadatakPrioritetChipComponent } from '../zadatak-prioritet-chip/zadatak-prioritet-chip.component';
 
 @Component({
   selector: 'zadatak-card',
   standalone: true,
-  imports: [PrimengModule],
+  imports: [PrimengModule, ZadatakPrioritetChipComponent],
   providers: [DialogService],
   templateUrl: './zadatak-card.component.html',
   styleUrl: './zadatak-card.component.css',

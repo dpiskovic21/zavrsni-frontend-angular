@@ -7,11 +7,17 @@ import { FormsModule } from '@angular/forms';
 import { KomentarService } from '../../services/komentar.service';
 import { AutorizacijaService } from '../../../autorizacija/services/autorizacija.service';
 import { PrivitakListaComponent } from '../../../privitak/components/privitak-lista/privitak-lista.component';
+import { ZadatakPrioritetChipComponent } from '../zadatak-prioritet-chip/zadatak-prioritet-chip.component';
 
 @Component({
   selector: 'zadatak-detalji',
   standalone: true,
-  imports: [PrimengModule, FormsModule, PrivitakListaComponent],
+  imports: [
+    PrimengModule,
+    FormsModule,
+    PrivitakListaComponent,
+    ZadatakPrioritetChipComponent,
+  ],
   templateUrl: './zadatak-detalji.component.html',
   styleUrl: './zadatak-detalji.component.css',
 })
@@ -115,18 +121,5 @@ export class ZadatakDetaljiComponent implements OnInit {
         console.log(err);
       },
     });
-  }
-
-  getTagColor(prioritet: string): string {
-    switch (prioritet) {
-      case 'NIZAK':
-        return 'green';
-      case 'SREDNJI':
-        return 'yellow';
-      case 'VISOK':
-        return 'orange';
-      default:
-        return 'red';
-    }
   }
 }

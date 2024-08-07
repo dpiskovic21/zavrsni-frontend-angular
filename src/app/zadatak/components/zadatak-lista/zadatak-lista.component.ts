@@ -86,8 +86,8 @@ export class ZadatakListaComponent implements OnInit {
             ? new Date(a.rok).getMilliseconds() -
               new Date(b.rok).getMilliseconds()
             : this.sortiranje$.value === 'Prioritet'
-            ? this.dohvatiVrijednostPrioriteta(a) -
-              this.dohvatiVrijednostPrioriteta(b)
+            ? this.dohvatiVrijednostPrioriteta(b) -
+              this.dohvatiVrijednostPrioriteta(a)
             : new Date(a.datumIzrade).getMilliseconds() -
               new Date(b.datumIzrade).getMilliseconds()
         )

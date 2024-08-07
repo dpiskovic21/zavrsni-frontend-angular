@@ -1,5 +1,5 @@
 <p-card [header]="zadatak.naziv">
-  <p>Prioritet: {{ zadatak.prioritet }}</p>
+  <zadatak-prioritet-chip [prioritet]="zadatak.prioritet" />
   <p>Stats: {{ zadatak.status }}</p>
   <p>Rok: {{ zadatak.rok | date }}</p>
   <ng-template pTemplate="footer">

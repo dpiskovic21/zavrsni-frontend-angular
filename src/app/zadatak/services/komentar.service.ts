@@ -11,7 +11,15 @@ export class KomentarService {
 
   constructor(private http: HttpClient) {}
 
+  getKomentari() {
+    return this.http.get<Komentar[]>(this.url);
+  }
+
   postKomenatar(komentar: KomentarDTO) {
     return this.http.post<Komentar>(this.url, komentar);
+  }
+
+  deleteKomentar(id: string) {
+    return this.http.delete(`${this.url}/${id}`);
   }
 }

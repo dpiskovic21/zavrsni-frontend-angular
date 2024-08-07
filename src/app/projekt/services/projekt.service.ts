@@ -26,4 +26,8 @@ export class ProjektService {
   getProjektStatistika(id: number) {
     return this.http.get<ProjektStatistika>(`${this.url}/${id}/statistika`);
   }
+
+  deleteProjekt(id: string) {
+    return this.http.delete(`${this.url}/${id}`);
+  }
 }

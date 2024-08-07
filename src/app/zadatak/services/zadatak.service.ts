@@ -12,6 +12,10 @@ export class ZadatakService {
 
   constructor(private http: HttpClient) {}
 
+  getZadatci() {
+    return this.http.get<Zadatak[]>(this.url);
+  }
+
   getZadatak(id: number) {
     return this.http.get<Zadatak>(`${this.url}/${id}`);
   }
@@ -22,5 +26,9 @@ export class ZadatakService {
 
   updateZadatak(id: number, updateZadatakDTO: UpdateZadatakDTO) {
     return this.http.patch<Zadatak>(`${this.url}/${id}`, updateZadatakDTO);
+  }
+
+  deleteZadatak(id: string) {
+    return this.http.delete<Zadatak>(`${this.url}/${id}`);
   }
 }

@@ -18,4 +18,8 @@ export class KorisnikService {
   getKorisnik(id: number) {
     return this.http.get<Korisnik>(`${this.url}/${id}`);
   }
+
+  deleteKorisnik(id: string) {
+    return this.http.delete(`${this.url}/${id}`);
+  }
 }

@@ -1,0 +1,31 @@
+<p-table [columns]="stupci" [value]="podaci">
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns">
+        {{ col.header }}
+      </th>
+      <th></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr>
+      <td *ngFor="let col of columns">
+        @if(podatakJeObjekt(rowData[col.field])) {
+        {{ rowData[col.field] | json }}
+        } @else {
+        {{ rowData[col.field] }}
+        }
+      </td>
+      <td>
+        <p-button
+          icon="pi pi-trash"
+          severity="danger"
+          [text]="true"
+          (onClick)="
+            obrisi.emit(rowData.id ? rowData.id.toString() : rowData.putanja)
+          "
+        ></p-button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

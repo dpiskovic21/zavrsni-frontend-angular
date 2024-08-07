@@ -10,11 +10,19 @@ export class PrivitakService {
 
   constructor(private http: HttpClient) {}
 
+  getPrivitci() {
+    return this.http.get<any[]>(this.url);
+  }
+
   getPrivitak(putanja: string) {
     return this.http.get<any>(`${this.url}/${putanja}`);
   }
 
   postPrivitak(dto: any) {
     return this.http.post<any>(this.url, dto);
+  }
+
+  deletePrivitak(putanja: string) {
+    return this.http.delete<any>(`${this.url}/${putanja}`);
   }
 }

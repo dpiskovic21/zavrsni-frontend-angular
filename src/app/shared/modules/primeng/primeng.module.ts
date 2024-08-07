@@ -19,6 +19,8 @@ import { TagModule } from 'primeng/tag';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { ChartModule } from 'primeng/chart';
+import { TableModule } from 'primeng/table';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -41,6 +43,7 @@ import { ChartModule } from 'primeng/chart';
     InputGroupModule,
     InputGroupAddonModule,
     ChartModule,
+    TableModule,
   ],
   exports: [
     CommonModule,
@@ -62,6 +65,7 @@ import { ChartModule } from 'primeng/chart';
     InputGroupModule,
     InputGroupAddonModule,
     ChartModule,
+    TableModule,
   ],
 })
 export class PrimengModule {}

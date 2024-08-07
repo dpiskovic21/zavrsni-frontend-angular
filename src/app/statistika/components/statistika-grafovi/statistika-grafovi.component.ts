@@ -41,6 +41,12 @@ export class StatistikaGrafoviComponent {
       labels: [],
       datasets: [{ data: [], backgroundColor: [] }],
     };
+
+    if (Object.keys(korisniciSaBrojemZadataka).length == 0) {
+      this.brojZadatakaPoKorisniku.labels.push('Nema podataka');
+      return;
+    }
+
     for (const id in korisniciSaBrojemZadataka) {
       this.brojZadatakaPoKorisniku.labels.push(
         korisniciSaBrojemZadataka[id].naziv
@@ -61,6 +67,11 @@ export class StatistikaGrafoviComponent {
       labels: [],
       datasets: [{ data: [], backgroundColor: [] }],
     };
+
+    if (Object.keys(zakasnjeliRokovi).length == 0) {
+      this.zakasnjeliRokovi.labels.push('Nema podataka');
+      return;
+    }
 
     for (const id in zakasnjeliRokovi) {
       this.zakasnjeliRokovi.labels.push(zakasnjeliRokovi[id].naziv);

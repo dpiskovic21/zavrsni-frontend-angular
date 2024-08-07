@@ -24,7 +24,6 @@ export class StatistikaHomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.projektService.getProjekti().subscribe((projekti) => {
-      console.log(projekti);
       if (this.autorizacijaService.prijavljeniKorisnik?.admin) {
         this.projekti = projekti;
       } else
@@ -36,7 +35,6 @@ export class StatistikaHomeComponent implements OnInit {
                 this.autorizacijaService.prijavljeniKorisnik?.id!
             ) != null
         );
-      console.log(this.projekti);
     });
   }
 }

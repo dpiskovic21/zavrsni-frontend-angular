@@ -7,6 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { PrimengModule } from '../../../shared/modules/primeng/primeng.module';
+import { Router } from '@angular/router';
+import { AppRute } from '../../../routes/app-rute';
 
 @Component({
   selector: 'app-registracija',
@@ -17,7 +19,10 @@ import { PrimengModule } from '../../../shared/modules/primeng/primeng.module';
 })
 export class RegistracijaComponent {
   forma!: FormGroup;
-  constructor(private autorizacijaService: AutorizacijaService) {}
+  constructor(
+    private autorizacijaService: AutorizacijaService,
+    private ruter: Router
+  ) {}
 
   ngOnInit() {
     this.forma = new FormGroup({
@@ -30,6 +35,13 @@ export class RegistracijaComponent {
   }
 
   registracija() {
-    console.log(this.forma.value);
+    if (this.forma.invalid) return;
+
+    this.autorizacijaService.registracija(this.forma.value).subscribe({
+      next: (_) => {
+        this.ruter.navigateByUrl(`${AppRute.Autorizacija}`);
+      },
+      error: (err) => console.log(err),
+    });
   }
 }

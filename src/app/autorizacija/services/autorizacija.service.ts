@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { apiURL } from '../../app.config';
-import { PrijavaDTO } from '../interfaces';
+import { PrijavaDTO, RegistracijaDTO } from '../interfaces';
 import { Korisnik } from '../../korisnik/interfaces';
 
 @Injectable({
@@ -28,5 +28,9 @@ export class AutorizacijaService {
 
   odjava() {
     localStorage.removeItem('korisnik');
+  }
+
+  registracija(dto: RegistracijaDTO) {
+    return this.http.post<Korisnik>(this.url + '/registracija', dto);
   }
 }

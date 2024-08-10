@@ -12,7 +12,7 @@
     <label for="email">Email</label>
   </p-floatLabel>
   <p-floatLabel>
-    <input pInputText formControlName="lozinka" id="lozinka" />
+    <p-password [feedback]="false" formControlName="lozinka" id="lozinka" />
     <label for="lozinka">Lozinka</label>
   </p-floatLabel>
   <p-checkbox
@@ -20,5 +20,9 @@
     [binary]="true"
     label="Admin"
   ></p-checkbox>
-  <p-button label="Registracija" type="submit"></p-button>
+  <p-button
+    label="Registracija"
+    type="submit"
+    [disabled]="forma.invalid"
+  ></p-button>
 </form>

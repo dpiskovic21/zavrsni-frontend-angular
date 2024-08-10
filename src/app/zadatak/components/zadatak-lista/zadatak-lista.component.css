@@ -1,0 +1,6 @@
+.zadaci {
+    display: flex;
+    gap: 5rem;
+    flex-wrap: wrap;
+    margin:2rem;
+}

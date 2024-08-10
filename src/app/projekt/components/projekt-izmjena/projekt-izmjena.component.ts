@@ -3,9 +3,10 @@ import { KorisnikService } from '../../../korisnik/services/korisnik.service';
 import { KorisnikNaziv } from '../../../korisnik/interfaces';
 import { PrimengModule } from '../../../shared/modules/primeng/primeng.module';
 import { FormsModule } from '@angular/forms';
-import { DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Projekt } from '../../interfaces';
 import { ProjektService } from '../../services/projekt.service';
+import { ToastService } from '../../../shared/services/toast.service';
 
 @Component({
   selector: 'app-projekt-izmjena',
@@ -26,7 +27,9 @@ export class ProjektIzmjenaComponent implements OnInit {
   constructor(
     private korisniciService: KorisnikService,
     private projektService: ProjektService,
-    private config: DynamicDialogConfig
+    private config: DynamicDialogConfig,
+    private ref: DynamicDialogRef,
+    private toast: ToastService
   ) {}
 
   ngOnInit() {
@@ -51,11 +54,10 @@ export class ProjektIzmjenaComponent implements OnInit {
       })
       .subscribe({
         next: (r) => {
-          console.log(r);
+          this.toast.showSuccess('Izmjene spremljene');
+          this.ref.close(true);
         },
-        error: (err) => {
-          console.log(err);
-        },
+        error: (err) => this.toast.showError('Greška pri spremanju izmjena'),
       });
   }
 }

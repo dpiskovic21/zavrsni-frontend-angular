@@ -9,6 +9,7 @@ import {
 import { PrimengModule } from '../../../shared/modules/primeng/primeng.module';
 import { Router } from '@angular/router';
 import { AppRute } from '../../../routes/app-rute';
+import { ToastService } from '../../../shared/services/toast.service';
 
 @Component({
   selector: 'app-registracija',
@@ -21,7 +22,8 @@ export class RegistracijaComponent {
   forma!: FormGroup;
   constructor(
     private autorizacijaService: AutorizacijaService,
-    private ruter: Router
+    private ruter: Router,
+    private toast: ToastService
   ) {}
 
   ngOnInit() {
@@ -39,9 +41,10 @@ export class RegistracijaComponent {
 
     this.autorizacijaService.registracija(this.forma.value).subscribe({
       next: (_) => {
+        this.toast.showSuccess('Uspješna registracija');
         this.ruter.navigateByUrl(`${AppRute.Autorizacija}`);
       },
-      error: (err) => console.log(err),
+      error: (err) => this.toast.showError(err.error.message ?? 'Greška'),
     });
   }
 }

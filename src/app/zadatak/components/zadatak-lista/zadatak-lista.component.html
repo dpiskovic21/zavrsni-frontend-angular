@@ -4,12 +4,14 @@
   (prikaz)="onPrikazChange($event)"
 ></zadatak-filter>
 
-@for (zadatak of (zadaci$ | async); track $index) {
-<zadatak-card
-  [zadatak]="zadatak"
-  (zadatakIzmjenjen)="dohvatiProjekte$.next()"
-></zadatak-card>
-}
+<div class="zadaci">
+  @for (zadatak of (zadaci$ | async); track $index) {
+  <zadatak-card
+    [zadatak]="zadatak"
+    (zadatakIzmjenjen)="dohvatiProjekte$.next()"
+  ></zadatak-card>
+  }
+</div>
 
 <p-button
   *ngIf="mozeDodatiZadatak"

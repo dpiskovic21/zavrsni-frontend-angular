@@ -11,6 +11,7 @@ import { ZadatakPrioritetChipComponent } from '../zadatak-prioritet-chip/zadatak
 import { Editor } from 'primeng/editor';
 import { KorisnikService } from '../../../korisnik/services/korisnik.service';
 import { KorisnikNaziv } from '../../../korisnik/interfaces';
+import { ToastService } from '../../../shared/services/toast.service';
 
 @Component({
   selector: 'zadatak-detalji',
@@ -42,7 +43,8 @@ export class ZadatakDetaljiComponent implements OnInit {
     private komentarService: KomentarService,
     private autorizacijaService: AutorizacijaService,
     private renderer: Renderer2,
-    private korisnikService: KorisnikService
+    private korisnikService: KorisnikService,
+    private toast: ToastService
   ) {}
 
   ngOnInit() {
@@ -98,10 +100,10 @@ export class ZadatakDetaljiComponent implements OnInit {
       .subscribe({
         next: () => {
           this.ref.close(true);
-          console.log('Zadatak natrag u izradi');
+          this.toast.showSuccess('Zadatak natrag u izradi');
         },
         error: (err) => {
-          console.log(err);
+          this.toast.showError('Greška pri vraćanju zadatka na doradu');
         },
       });
   }
@@ -115,10 +117,10 @@ export class ZadatakDetaljiComponent implements OnInit {
       .subscribe({
         next: () => {
           this.ref.close(true);
-          console.log('Zadatak zatvoren');
+          this.toast.showSuccess('Zadatak zatvoren');
         },
         error: (err) => {
-          console.log(err);
+          this.toast.showError('Greška pri zatvaranju zadatka');
         },
       });
   }
@@ -131,10 +133,10 @@ export class ZadatakDetaljiComponent implements OnInit {
       .subscribe({
         next: () => {
           this.ref.close(true);
-          console.log('Zadatak na pregledu');
+          this.toast.showSuccess('Zadatak poslan na pregled');
         },
         error: (err) => {
-          console.log(err);
+          this.toast.showError('Greška pri slanju zadatka na pregled');
         },
       });
   }
@@ -152,9 +154,10 @@ export class ZadatakDetaljiComponent implements OnInit {
       next: () => {
         this.dohvatiZadatak();
         this.noviKomentar = '';
+        this.toast.showSuccess('Komentar dodan');
       },
       error: (err) => {
-        console.log(err);
+        this.toast.showError('Greška pri dodavanju komentara');
       },
     });
   }
@@ -168,11 +171,11 @@ export class ZadatakDetaljiComponent implements OnInit {
       .updateZadatak(this.zadatak.id, updateZadatakDTO)
       .subscribe({
         next: () => {
-          console.log('Zadatak opis ažuriran');
+          this.toast.showSuccess('Opis ažuriran');
           this.trebaAzuriratiOpis = false;
         },
         error: (err) => {
-          console.log(err);
+          this.toast.showError('Greška pri ažuriranju opisa');
         },
       });
   }
@@ -185,10 +188,10 @@ export class ZadatakDetaljiComponent implements OnInit {
       .updateZadatak(this.zadatak.id, updateZadatakDTO)
       .subscribe({
         next: () => {
-          console.log('Izvrsitelj  ažuriran');
+          this.toast.showSuccess('Izvršitelj ažuriran');
         },
         error: (err) => {
-          console.log(err);
+          this.toast.showError('Greška pri ažuriranju izvršitelja');
         },
       });
   }

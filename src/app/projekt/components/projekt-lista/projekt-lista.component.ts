@@ -5,7 +5,7 @@ import { ProjektCardComponent } from '../projekt-card/projekt-card.component';
 import { Router } from '@angular/router';
 import { ProjektRute } from '../../routes/projekt-rute';
 import { AppRute } from '../../../routes/app-rute';
-import { map } from 'rxjs';
+import { Projekt } from '../../interfaces';
 
 @Component({
   selector: 'projekt-lista',
@@ -15,16 +15,24 @@ import { map } from 'rxjs';
   styleUrl: './projekt-lista.component.css',
 })
 export class ProjektListaComponent {
-  projekti$ = this.projektService.getProjekti().pipe(
-    map((projekti) =>
-      projekti.sort((a, b) => {
+  projekti: Projekt[] = [];
+
+  constructor(private projektService: ProjektService, private ruter: Router) {}
+
+  ngOnInit() {
+    this.dohvatiProjekte();
+  }
+
+  dohvatiProjekte() {
+    this.projektService.getProjekti().subscribe((projekti) => {
+      this.projekti = projekti.sort((a, b) => {
         return (
           this.dohvatiVrijednostStatusaProjekta(a.status) -
           this.dohvatiVrijednostStatusaProjekta(b.status)
         );
-      })
-    )
-  );
+      });
+    });
+  }
 
   dohvatiVrijednostStatusaProjekta(status: string) {
     switch (status) {
@@ -36,8 +44,6 @@ export class ProjektListaComponent {
         return 2;
     }
   }
-
-  constructor(private projektService: ProjektService, private ruter: Router) {}
 
   navigirajNaIzraduProjekta() {
     this.ruter.navigateByUrl(`/${AppRute.Projekt}/${ProjektRute.Novi}`);

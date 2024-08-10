@@ -1,6 +1,11 @@
-@for (projekt of (projekti$ | async); track $index) {
-<projekt-card [projekt]="projekt"></projekt-card>
-}
+<div class="projekti">
+  @for (projekt of projekti; track $index) {
+  <projekt-card
+    [projekt]="projekt"
+    (projektIzmjenjen)="dohvatiProjekte()"
+  ></projekt-card>
+  }
+</div>
 
 <p-button
   icon="pi pi-plus"

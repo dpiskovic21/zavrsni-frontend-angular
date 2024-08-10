@@ -1,0 +1,6 @@
+.projekti {
+    margin: 2rem;
+    display: flex;
+    gap: 5rem;
+    flex-wrap: wrap;
+}

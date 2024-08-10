@@ -91,13 +91,12 @@ export class ZadatakListaComponent implements OnInit {
       map((zadaci) =>
         zadaci.sort((a, b) =>
           this.sortiranje$.value === 'Rok'
-            ? new Date(a.rok).getMilliseconds() -
-              new Date(b.rok).getMilliseconds()
+            ? new Date(b.rok).getTime() - new Date(a.rok).getTime()
             : this.sortiranje$.value === 'Prioritet'
             ? this.dohvatiVrijednostPrioriteta(b) -
               this.dohvatiVrijednostPrioriteta(a)
-            : new Date(a.datumIzrade).getMilliseconds() -
-              new Date(b.datumIzrade).getMilliseconds()
+            : new Date(a.datumIzrade).getTime() -
+              new Date(b.datumIzrade).getTime()
         )
       ),
       map((zadaci) =>

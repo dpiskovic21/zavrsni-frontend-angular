@@ -14,6 +14,7 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ActivatedRoute } from '@angular/router';
 import { Zadatak, ZadatakDTO } from '../../interfaces';
 import { AutorizacijaService } from '../../../autorizacija/services/autorizacija.service';
+import { ToastService } from '../../../shared/services/toast.service';
 @Component({
   selector: 'zadatak-novi',
   standalone: true,
@@ -30,7 +31,8 @@ export class ZadatakNoviComponent {
     private zadatakService: ZadatakService,
     private ref: DynamicDialogRef,
     private ruta: ActivatedRoute,
-    private autorizacijaService: AutorizacijaService
+    private autorizacijaService: AutorizacijaService,
+    private toast: ToastService
   ) {}
 
   ngOnInit() {
@@ -82,10 +84,11 @@ export class ZadatakNoviComponent {
 
     this.zadatakService.postZadatak(dto).subscribe({
       next: () => {
+        this.toast.showSuccess('Zadatak uspješno dodan');
         this.ref.close(true);
       },
       error: () => {
-        console.log('error adding new task');
+        this.toast.showError('Greška prilikom dodavanja zadatka');
       },
     });
   }

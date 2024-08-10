@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PrimengModule } from '../../../shared/modules/primeng/primeng.module';
 import { Projekt } from '../../interfaces';
 import { Router } from '@angular/router';
@@ -16,7 +16,9 @@ import { ProjektIzmjenaComponent } from '../projekt-izmjena/projekt-izmjena.comp
 })
 export class ProjektCardComponent {
   @Input() projekt!: Projekt;
+  @Output() projektIzmjenjen = new EventEmitter<void>();
   ref: DynamicDialogRef | undefined;
+  projekts: any;
 
   constructor(private ruter: Router, private dialog: DialogService) {}
 
@@ -31,5 +33,38 @@ export class ProjektCardComponent {
       height: '70%',
       data: this.projekt.id,
     });
+
+    this.ref.onClose.subscribe((r) => {
+      if (r) {
+        this.projektIzmjenjen.emit();
+      }
+    });
+  }
+
+  getProjektStatusTagPozadina(
+    status: string
+  ): { [klass: string]: any } | null | undefined {
+    switch (status) {
+      case 'U_TIJEKU':
+        return { background: 'green' };
+      case 'ZAVRSEN':
+        return { background: 'orange' };
+      case 'OTKAZAN':
+        return { background: 'red' };
+      default:
+        return { background: 'gray' };
+    }
+  }
+  getProjektSatusVrijednostZaPrikaz(status: string) {
+    switch (status) {
+      case 'U_TIJEKU':
+        return 'U tijeku';
+      case 'ZAVRSEN':
+        return 'Završen';
+      case 'OTKAZAN':
+        return 'Otkazan';
+      default:
+        return 'Nepoznat';
+    }
   }
 }

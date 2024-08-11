@@ -91,54 +91,34 @@ export class ZadatakDetaljiComponent implements OnInit {
     });
   }
 
+  azurirajZadatak(
+    dto: UpdateZadatakDTO,
+    zatvoriDialog = false,
+    trebaAzuriratiOpis = false
+  ) {
+    this.zadatakService.updateZadatak(this.zadatak.id, dto).subscribe({
+      next: () => {
+        if (zatvoriDialog) this.ref.close(true);
+        this.toast.showSuccess('Zadatak ažuriran');
+        if (trebaAzuriratiOpis) {
+          this.trebaAzuriratiOpis = false;
+        }
+      },
+      error: (err) => {
+        this.toast.showError('Greška pri ažuriranju zadatka');
+      },
+    });
+  }
+
   vratiNaDoradu() {
-    const updateZadatakDTO: UpdateZadatakDTO = {
-      status: 'U_IZRADI',
-    };
-    this.zadatakService
-      .updateZadatak(this.zadatak.id, updateZadatakDTO)
-      .subscribe({
-        next: () => {
-          this.ref.close(true);
-          this.toast.showSuccess('Zadatak natrag u izradi');
-        },
-        error: (err) => {
-          this.toast.showError('Greška pri vraćanju zadatka na doradu');
-        },
-      });
+    this.azurirajZadatak({ status: 'U_IZRADI' }, true);
   }
 
   zatvori() {
-    const updateZadatakDTO: UpdateZadatakDTO = {
-      status: 'ZATVOREN',
-    };
-    this.zadatakService
-      .updateZadatak(this.zadatak.id, updateZadatakDTO)
-      .subscribe({
-        next: () => {
-          this.ref.close(true);
-          this.toast.showSuccess('Zadatak zatvoren');
-        },
-        error: (err) => {
-          this.toast.showError('Greška pri zatvaranju zadatka');
-        },
-      });
+    this.azurirajZadatak({ status: 'ZATVOREN' }, true);
   }
   posaljiNaPregled() {
-    const updateZadatakDTO: UpdateZadatakDTO = {
-      status: 'NA_PREGLEDU',
-    };
-    this.zadatakService
-      .updateZadatak(this.zadatak.id, updateZadatakDTO)
-      .subscribe({
-        next: () => {
-          this.ref.close(true);
-          this.toast.showSuccess('Zadatak poslan na pregled');
-        },
-        error: (err) => {
-          this.toast.showError('Greška pri slanju zadatka na pregled');
-        },
-      });
+    this.azurirajZadatak({ status: 'NA_PREGLEDU' }, true);
   }
 
   dodajKomentar() {
@@ -164,35 +144,10 @@ export class ZadatakDetaljiComponent implements OnInit {
 
   updateOpis() {
     if (!this.trebaAzuriratiOpis) return;
-    const updateZadatakDTO: UpdateZadatakDTO = {
-      opis: this.zadatak.opis,
-    };
-    this.zadatakService
-      .updateZadatak(this.zadatak.id, updateZadatakDTO)
-      .subscribe({
-        next: () => {
-          this.toast.showSuccess('Opis ažuriran');
-          this.trebaAzuriratiOpis = false;
-        },
-        error: (err) => {
-          this.toast.showError('Greška pri ažuriranju opisa');
-        },
-      });
+    this.azurirajZadatak({ opis: this.zadatak.opis }, false, true);
   }
 
   promjeniIzvrsitelja() {
-    const updateZadatakDTO: UpdateZadatakDTO = {
-      izvrsiteljId: this.zadatak.izvrsiteljId,
-    };
-    this.zadatakService
-      .updateZadatak(this.zadatak.id, updateZadatakDTO)
-      .subscribe({
-        next: () => {
-          this.toast.showSuccess('Izvršitelj ažuriran');
-        },
-        error: (err) => {
-          this.toast.showError('Greška pri ažuriranju izvršitelja');
-        },
-      });
+    this.azurirajZadatak({ izvrsiteljId: this.zadatak.izvrsiteljId });
   }
 }

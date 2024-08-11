@@ -1,6 +1,5 @@
 <p-card [header]="projekt.naziv">
   <p>Započet: {{ projekt.datumPocetka | date }}</p>
-  <p>Status: {{ projekt.status }}</p>
   <p-tag [style]="getProjektStatusTagPozadina(projekt.status)">{{
     getProjektSatusVrijednostZaPrikaz(projekt.status)
   }}</p-tag>

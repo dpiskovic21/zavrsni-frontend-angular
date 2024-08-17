@@ -62,6 +62,10 @@ export class ZadatakDetaljiComponent implements OnInit {
 
   dohvatiZadatak() {
     this.zadatakService.getZadatak(this.config.data.id).subscribe((zadatak) => {
+      zadatak.komentari = zadatak.komentari.sort(
+        (a, b) =>
+          new Date(b.datumIzrade).getTime() - new Date(a.datumIzrade).getTime()
+      );
       this.zadatak = zadatak;
       this.mozePoslatiNaPregled =
         this.zadatak.status == 'U_IZRADI' &&
@@ -94,13 +98,13 @@ export class ZadatakDetaljiComponent implements OnInit {
   azurirajZadatak(
     dto: UpdateZadatakDTO,
     zatvoriDialog = false,
-    trebaAzuriratiOpis = false
+    azuriranOpis = false
   ) {
     this.zadatakService.updateZadatak(this.zadatak.id, dto).subscribe({
       next: () => {
         if (zatvoriDialog) this.ref.close(true);
         this.toast.showSuccess('Zadatak ažuriran');
-        if (trebaAzuriratiOpis) {
+        if (azuriranOpis) {
           this.trebaAzuriratiOpis = false;
         }
       },

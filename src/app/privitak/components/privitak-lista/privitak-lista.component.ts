@@ -18,7 +18,6 @@ export class PrivitakListaComponent {
   @Input() zadatakId!: number;
   @Input() mozeDodati = false;
   @Output() privitakUpload = new EventEmitter<void>();
-  ref: DynamicDialogRef | undefined;
 
   constructor(private privitakService: PrivitakService) {}
 

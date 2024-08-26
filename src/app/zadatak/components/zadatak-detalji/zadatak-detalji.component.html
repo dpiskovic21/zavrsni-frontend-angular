@@ -1,81 +1,75 @@
 @if (zadatak) {
 
 <div class="osnovni-detalji">
-  <zadatak-prioritet-chip [prioritet]="zadatak.prioritet" />
-  <p>{{ zadatak.status }}</p>
-  <p>Napravljen: {{ zadatak.datumIzrade | date : "MMM dd, yyyy hh:mm a" }}</p>
-  <p *ngIf="zadatak.datumZavrsetka">
-    Završen: {{ zadatak.datumZavrsetka | date : "MMM dd, yyyy hh:mm a" }}
-  </p>
-  <button pButton *ngIf="mozePoslatiNaPregled" (click)="posaljiNaPregled()">
-    Pošalji na pregled
-  </button>
-  <button
-    pButton
-    *ngIf="mozeZatvoritiIliVratitiNaDoradu"
-    (click)="vratiNaDoradu()"
-  >
-    Vrati na doradu
-  </button>
-  <button pButton *ngIf="mozeZatvoritiIliVratitiNaDoradu" (click)="zatvori()">
-    Zatvori zadatak
-  </button>
+	<zadatak-prioritet-chip [prioritet]="zadatak.prioritet" />
+	<p>Napravljen: {{ zadatak.datumIzrade | date : 'MMM dd, yyyy hh:mm a' }}</p>
+	<p *ngIf="zadatak.datumZavrsetka">
+		Završen: {{ zadatak.datumZavrsetka | date : 'MMM dd, yyyy hh:mm a' }}
+	</p>
+	<button pButton *ngIf="mozePoslatiNaPregled" (click)="posaljiNaPregled()">
+		Pošalji na pregled
+	</button>
+	<button
+		pButton
+		*ngIf="mozeZatvoritiIliVratitiNaDoradu"
+		(click)="vratiNaDoradu()">
+		Vrati na doradu
+	</button>
+	<button pButton *ngIf="mozeZatvoritiIliVratitiNaDoradu" (click)="zatvori()">
+		Zatvori zadatak
+	</button>
 </div>
 <div class="korisnici-privitci">
-  <div class="korisnici">
-    <p style="margin-bottom: 1.5rem">
-      Izvjestitelj:
-      {{ zadatak.izvjestitelj.ime + " " + zadatak.izvjestitelj.prezime }}
-    </p>
-    <p *ngIf="mozePromjenitiIzvrsitelja == false">
-      Izvršitelj:
-      {{ zadatak.izvrsitelj.ime + " " + zadatak.izvrsitelj.prezime }}
-    </p>
-    <p-floatLabel>
-      <p-dropdown
-        *ngIf="mozePromjenitiIzvrsitelja"
-        [options]="korisnici"
-        optionLabel="naziv"
-        [(ngModel)]="zadatak.izvrsiteljId"
-        (onChange)="promjeniIzvrsitelja()"
-        optionValue="id"
-        id="izvrsitelj"
-      />
-      <label for="izvrsitelj">Izvršitelj</label>
-    </p-floatLabel>
-  </div>
+	<div class="korisnici">
+		<p style="margin-bottom: 1.5rem">
+			Izvjestitelj:
+			{{ zadatak.izvjestitelj.ime + ' ' + zadatak.izvjestitelj.prezime }}
+		</p>
+		<p *ngIf="mozePromjenitiIzvrsitelja == false">
+			Izvršitelj:
+			{{ zadatak.izvrsitelj.ime + ' ' + zadatak.izvrsitelj.prezime }}
+		</p>
+		<p-floatLabel>
+			<p-dropdown
+				*ngIf="mozePromjenitiIzvrsitelja"
+				[options]="korisnici"
+				optionLabel="naziv"
+				[(ngModel)]="zadatak.izvrsiteljId"
+				(onChange)="promjeniIzvrsitelja()"
+				optionValue="id"
+				id="izvrsitelj" />
+			<label for="izvrsitelj">Izvršitelj</label>
+		</p-floatLabel>
+	</div>
 
-  <privitak-lista
-    [privitci]="zadatak.privitci"
-    [zadatakId]="zadatak.id"
-    [mozeDodati]="mozeDodatiPrivitak"
-    (privitakUpload)="dohvatiZadatak()"
-  ></privitak-lista>
+	<privitak-lista
+		[privitci]="zadatak.privitci"
+		[zadatakId]="zadatak.id"
+		[mozeDodati]="mozeDodatiPrivitak"
+		(privitakUpload)="dohvatiZadatak()"></privitak-lista>
 </div>
 
 <p-editor
-  #editor
-  [(ngModel)]="zadatak.opis"
-  (onTextChange)="trebaAzuriratiOpis = true"
-/>
+	#editor
+	[(ngModel)]="zadatak.opis"
+	(onTextChange)="trebaAzuriratiOpis = true" />
 <div class="komentari">
-  <h3>Komentari</h3>
-  <p-inputGroup>
-    <input [(ngModel)]="noviKomentar" pInputText />
-    <button
-      (click)="dodajKomentar()"
-      pButton
-      type="button"
-      icon="pi pi-send"
-    ></button>
-  </p-inputGroup>
+	<h3>Komentari</h3>
+	<p-inputGroup>
+		<input [(ngModel)]="noviKomentar" pInputText />
+		<button
+			(click)="dodajKomentar()"
+			pButton
+			type="button"
+			icon="pi pi-send"></button>
+	</p-inputGroup>
 
-  <div *ngFor="let komentar of zadatak.komentari">
-    <span
-      >{{ komentar.korisnik.ime + " " + komentar.korisnik.prezime }}
-      {{ komentar.datumIzrade | date : "MMM dd, yyyy hh:mm a" }}</span
-    >
-    <p>{{ komentar.sadrzaj }}</p>
-  </div>
+	<div *ngFor="let komentar of zadatak.komentari">
+		<span
+			>{{ komentar.korisnik.ime + ' ' + komentar.korisnik.prezime }}
+			{{ komentar.datumIzrade | date : 'MMM dd, yyyy hh:mm a' }}</span
+		>
+		<p>{{ komentar.sadrzaj }}</p>
+	</div>
 </div>
 }

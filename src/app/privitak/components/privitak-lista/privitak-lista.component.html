@@ -1,10 +1,11 @@
+<h4 style="margin-bottom: 0">Privitci</h4>
 <div class="privitak-lista">
-  <a *ngFor="let privitak of privitci" (click)="preuzmiPrivitak(privitak)">
-    {{ privitak.naziv }}
-  </a>
+	<a *ngFor="let privitak of privitci" (click)="preuzmiPrivitak(privitak)">
+		{{ privitak.naziv }}
+	</a>
 </div>
 <privitak-upload
-  *ngIf="mozeDodati"
-  [zadatakId]="zadatakId"
-  (privitakUpload)="privitakUpload.emit()"
-></privitak-upload>
+	style="float: right; margin-top: -3rem"
+	*ngIf="mozeDodati"
+	[zadatakId]="zadatakId"
+	(privitakUpload)="privitakUpload.emit()"></privitak-upload>

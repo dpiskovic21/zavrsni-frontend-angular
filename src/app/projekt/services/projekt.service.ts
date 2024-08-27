@@ -2,42 +2,47 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { apiURL } from '../../app.config';
 import { CreateProjektDTO, Projekt, ProjektStatistika } from '../interfaces';
+import { StatistikaProjekta } from '../../statistika/interfaces';
 
 @Injectable({
-  providedIn: 'root',
+	providedIn: 'root',
 })
 export class ProjektService {
-  private readonly url = apiURL + '/projekt';
+	private readonly url = apiURL + '/projekt';
 
-  constructor(private http: HttpClient) {}
+	constructor(private http: HttpClient) {}
 
-  createProjekt(dto: CreateProjektDTO) {
-    return this.http.post(this.url, dto);
-  }
+	createProjekt(dto: CreateProjektDTO) {
+		return this.http.post(this.url, dto);
+	}
 
-  getProjekti() {
-    return this.http.get<Projekt[]>(this.url);
-  }
+	getProjektiStatistika() {
+		return this.http.get<StatistikaProjekta>(`${this.url}/statistika`);
+	}
 
-  getProjekt(id: number) {
-    return this.http.get<Projekt>(`${this.url}/${id}`);
-  }
+	getProjekti() {
+		return this.http.get<Projekt[]>(this.url);
+	}
 
-  getProjektStatistika(id: number, datum: Date | null = null) {
-    let datumQuery = '';
-    if (datum) {
-      datumQuery = `?datum=${datum.toISOString()}`;
-    }
-    return this.http.get<ProjektStatistika>(
-      `${this.url}/${id}/statistika${datumQuery}`
-    );
-  }
+	getProjekt(id: number) {
+		return this.http.get<Projekt>(`${this.url}/${id}`);
+	}
 
-  deleteProjekt(id: string) {
-    return this.http.delete(`${this.url}/${id}`);
-  }
+	getProjektStatistika(id: number, datum: Date | null = null) {
+		let datumQuery = '';
+		if (datum) {
+			datumQuery = `?datum=${datum.toISOString()}`;
+		}
+		return this.http.get<ProjektStatistika>(
+			`${this.url}/${id}/statistika${datumQuery}`
+		);
+	}
 
-  updateProjekt(id: number, dto: any) {
-    return this.http.patch(`${this.url}/${id}`, dto);
-  }
+	deleteProjekt(id: string) {
+		return this.http.delete(`${this.url}/${id}`);
+	}
+
+	updateProjekt(id: number, dto: any) {
+		return this.http.patch(`${this.url}/${id}`, dto);
+	}
 }

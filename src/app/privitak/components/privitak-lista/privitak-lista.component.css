@@ -1,23 +1,18 @@
-:host {
-    flex: 1;
-    display: flex;
-    justify-content: end;
-    gap:0.5rem;
-    border: 1px solid black;
-    padding: 0.25rem 2rem;
-    margin-left: 1rem;
-}
 
 .privitak-lista {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: start;
-    gap: 0.5rem;
-}
-
-
-
-a:hover {
-    cursor:pointer;
-    color:red;
-}
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fefefe;
+  }
+  
+  .privitak-lista a {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #007ad9;
+    text-decoration: none;
+  }
+  
+  .privitak-lista a:hover {
+    text-decoration: underline;
+  }

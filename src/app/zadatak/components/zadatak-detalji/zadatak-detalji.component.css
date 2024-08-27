@@ -1,17 +1,4 @@
-.sadrzaj {
-  display: flex;
-  padding: 2.5rem;
-}
-
-
 .osnovni-detalji {
-  display: flex;
-  gap: 1rem;
-  justify-content: start;
-  align-items: center;
-}
-
-.korisnici-privitci {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1rem;

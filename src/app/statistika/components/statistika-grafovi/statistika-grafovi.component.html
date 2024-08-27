@@ -1,19 +1,20 @@
 <p-calendar
-  *ngIf="prikaziKalendarZaFiltirirnje()"
-  [(ngModel)]="filterDatum"
-  view="month"
-  dateFormat="mm/yy"
-  [readonlyInput]="true"
-  (ngModelChange)="onDatumChange()"
-  [maxDate]="danas"
-  placeholder="Datum"
-/>
+	*ngIf="prikaziKalendarZaFiltirirnje()"
+	[(ngModel)]="filterDatum"
+	view="month"
+	dateFormat="mm/yy"
+	[readonlyInput]="true"
+	(ngModelChange)="onDatumChange()"
+	[maxDate]="danas"
+	placeholder="Datum" />
 
-<div class="graf">
-  <h3>Broj zadataka po korisniku</h3>
-  <p-chart type="pie" [data]="brojZadatakaPoKorisniku" />
-</div>
-<div class="graf">
-  <h3>Broj zadataka sa zakašnjelim rokovima po korisniku</h3>
-  <p-chart type="pie" [data]="zakasnjeliRokovi" />
+<div class="grafovi">
+	<div class="graf">
+		<h3>Broj zadataka po korisniku</h3>
+		<p-chart type="pie" [data]="brojZadatakaPoKorisniku" />
+	</div>
+	<div class="graf">
+		<h3>Broj zadataka sa zakašnjelim rokovima po korisniku</h3>
+		<p-chart type="pie" [data]="zakasnjeliRokovi" />
+	</div>
 </div>

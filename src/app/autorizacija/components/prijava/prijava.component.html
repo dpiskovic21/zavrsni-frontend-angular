@@ -1,14 +1,12 @@
 <form [formGroup]="forma">
-  <input type="text" formControlName="email" pInputText placeholder="EMAIL" />
-  <p-password
-    [feedback]="false"
-    formControlName="lozinka"
-    placeholder="LOZINKA"
-  /><p-button label="Prijava" (onClick)="prijaviSe()" />
+	<input type="text" formControlName="email" pInputText placeholder="EMAIL" />
+	<p-password
+		[feedback]="false"
+		formControlName="lozinka"
+		placeholder="LOZINKA" /><p-button label="Prijava" (onClick)="prijaviSe()" />
 </form>
 
 <p-button
-  label="Registracija"
-  [text]="true"
-  (onClick)="navigirajNaRegistraciju()"
-></p-button>
+	label="Registracija"
+	[text]="true"
+	(onClick)="navigirajNaRegistraciju()"></p-button>

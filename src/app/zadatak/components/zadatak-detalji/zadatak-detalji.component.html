@@ -1,25 +1,25 @@
 @if (zadatak) {
 
 <div class="osnovni-detalji">
-	<zadatak-prioritet-chip [prioritet]="zadatak.prioritet" />
-	<p>Napravljen: {{ zadatak.datumIzrade | date : 'MMM dd, yyyy hh:mm a' }}</p>
-	<p *ngIf="zadatak.datumZavrsetka">
-		Završen: {{ zadatak.datumZavrsetka | date : 'MMM dd, yyyy hh:mm a' }}
-	</p>
-	<button pButton *ngIf="mozePoslatiNaPregled" (click)="posaljiNaPregled()">
-		Pošalji na pregled
-	</button>
-	<button
-		pButton
-		*ngIf="mozeZatvoritiIliVratitiNaDoradu"
-		(click)="vratiNaDoradu()">
-		Vrati na doradu
-	</button>
-	<button pButton *ngIf="mozeZatvoritiIliVratitiNaDoradu" (click)="zatvori()">
-		Zatvori zadatak
-	</button>
-</div>
-<div class="korisnici-privitci">
+	<div class="osnovno">
+		<zadatak-prioritet-chip [prioritet]="zadatak.prioritet" />
+		<p>Napravljen: {{ zadatak.datumIzrade | date : 'MMM dd, yyyy hh:mm a' }}</p>
+		<p *ngIf="zadatak.datumZavrsetka">
+			Završen: {{ zadatak.datumZavrsetka | date : 'MMM dd, yyyy hh:mm a' }}
+		</p>
+		<button pButton *ngIf="mozePoslatiNaPregled" (click)="posaljiNaPregled()">
+			Pošalji na pregled
+		</button>
+		<button
+			pButton
+			*ngIf="mozeZatvoritiIliVratitiNaDoradu"
+			(click)="vratiNaDoradu()">
+			Vrati na doradu
+		</button>
+		<button pButton *ngIf="mozeZatvoritiIliVratitiNaDoradu" (click)="zatvori()">
+			Zatvori zadatak
+		</button>
+	</div>
 	<div class="korisnici">
 		<p style="margin-bottom: 1.5rem">
 			Izvjestitelj:
@@ -29,9 +29,8 @@
 			Izvršitelj:
 			{{ zadatak.izvrsitelj.ime + ' ' + zadatak.izvrsitelj.prezime }}
 		</p>
-		<p-floatLabel>
+		<p-floatLabel *ngIf="mozePromjenitiIzvrsitelja">
 			<p-dropdown
-				*ngIf="mozePromjenitiIzvrsitelja"
 				[options]="korisnici"
 				optionLabel="naziv"
 				[(ngModel)]="zadatak.izvrsiteljId"
@@ -41,13 +40,14 @@
 			<label for="izvrsitelj">Izvršitelj</label>
 		</p-floatLabel>
 	</div>
-
-	<privitak-lista
-		[privitci]="zadatak.privitci"
-		[zadatakId]="zadatak.id"
-		[mozeDodati]="mozeDodatiPrivitak"
-		(privitakUpload)="dohvatiZadatak()"></privitak-lista>
 </div>
+
+<privitak-lista
+	[style]="{ 'margin-bottom': '5rem' }"
+	[privitci]="zadatak.privitci"
+	[zadatakId]="zadatak.id"
+	[mozeDodati]="mozeDodatiPrivitak"
+	(privitakUpload)="dohvatiZadatak()"></privitak-lista>
 
 <p-editor
 	#editor

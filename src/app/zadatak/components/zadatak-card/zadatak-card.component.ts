@@ -6,30 +6,28 @@ import { ZadatakDetaljiComponent } from '../zadatak-detalji/zadatak-detalji.comp
 import { ZadatakPrioritetChipComponent } from '../zadatak-prioritet-chip/zadatak-prioritet-chip.component';
 
 @Component({
-  selector: 'zadatak-card',
-  standalone: true,
-  imports: [PrimengModule, ZadatakPrioritetChipComponent],
-  providers: [DialogService],
-  templateUrl: './zadatak-card.component.html',
-  styleUrl: './zadatak-card.component.css',
+	selector: 'zadatak-card',
+	standalone: true,
+	imports: [PrimengModule, ZadatakPrioritetChipComponent],
+	providers: [DialogService],
+	templateUrl: './zadatak-card.component.html',
+	styleUrl: './zadatak-card.component.css',
 })
 export class ZadatakCardComponent {
-  @Input() zadatak!: Zadatak;
-  @Output() zadatakIzmjenjen = new EventEmitter<void>();
-  ref: DynamicDialogRef | undefined;
+	@Input() zadatak!: Zadatak;
+	@Output() zadatakIzmjenjen = new EventEmitter<void>();
+	ref: DynamicDialogRef | undefined;
 
-  constructor(private dialog: DialogService) {}
+	constructor(private dialog: DialogService) {}
 
-  otvoriDetalje() {
-    this.ref = this.dialog.open(ZadatakDetaljiComponent, {
-      header: this.zadatak.naziv,
-      data: this.zadatak,
-    });
-
-    this.ref.onClose.subscribe((r) => {
-      if (r) {
-        this.zadatakIzmjenjen.emit();
-      }
-    });
-  }
+	otvoriDetalje() {
+		this.ref = this.dialog.open(ZadatakDetaljiComponent, {
+			header: this.zadatak.naziv,
+			data: this.zadatak,
+			modal: true,
+		});
+		this.ref.onClose.subscribe((izmjenjen) => {
+			if (izmjenjen) this.zadatakIzmjenjen.emit();
+		});
+	}
 }
